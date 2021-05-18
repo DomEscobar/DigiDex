@@ -1,8 +1,8 @@
 <nav class="text-center fixed-top bg-white">
-    <div class="nav-body">
-        <div class="d-inline">
-            <div class="nav-item d-inline mx-4" [routerLink]="['digibles']">
-                <svg class="d-inline mr-1" version="1.0" xmlns="http://www.w3.org/2000/svg" width="50.000000pt"
+    <div class="nav-body d-flex">
+        <div class="flex-1">
+            <div class="nav-item d-inline-block mx-2" [routerLink]="['digibles']">
+                <svg class="d-inline-block" version="1.0" xmlns="http://www.w3.org/2000/svg" width="50.000000pt"
                     height="46.000000pt" viewBox="0 0 50.000000 46.000000" preserveAspectRatio="xMidYMid meet">
                     <g transform="translate(0.000000,46.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
                         <path
@@ -18,11 +18,12 @@
                                                                                         167 0 41 19 22 63 -67 26 -53 46 -98 44 -100z" />
                     </g>
                 </svg>
-                <span class="d-none d-md-inline">Digibles</span>
+                <span class="d-none d-md-inline-block">Digibles</span>
             </div>
-            <div class="nav-item d-inline mx-4" [routerLink]="['collectors']">
-                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="64.000000pt" height="64.000000pt"
-                    viewBox="0 0 64.000000 64.000000" preserveAspectRatio="xMidYMid meet">
+            <div class="nav-item justify-content-center align-center align-items-center mx-2"
+                [routerLink]="['collectors']">
+                <svg style="margin-top: -10px;" version="1.0" xmlns="http://www.w3.org/2000/svg" width="64.000000pt"
+                    height="64.000000pt" viewBox="0 0 64.000000 64.000000" preserveAspectRatio="xMidYMid meet">
 
                     <g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
                         <path d="M241 419 c-26 -26 -31 -38 -31 -79 0 -41 5 -53 31 -79 26 -26 38 -31
@@ -41,48 +42,69 @@
                     </g>
                 </svg>
 
-                <span class="d-none d-md-inline">Collectors</span>
+                <span class="d-none d-md-inline-block">Collectors</span>
             </div>
         </div>
-        <div class="d-inline x">X</div>
-        <div class="d-inline">
-            <div class="nav-item d-inline mx-4">
-                <svg class="d-inline mr-1" version="1.0" xmlns="http://www.w3.org/2000/svg" width="50.000000pt"
-                    height="46.000000pt" viewBox="0 0 50.000000 46.000000" preserveAspectRatio="xMidYMid meet">
-                    <g transform="translate(0.000000,46.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-                        <path
-                            d="M305 453 c-61 -5 -149 -31 -197 -58 -58 -33 -108 -80 -108 -103 0
-                                                                                        -10 40 -77 88 -148 79 -114 92 -129 120 -132 20 -2 42 4 60 18 23 17 51 24
-                                                                                        117 29 119 9 117 5 113 204 -3 153 -4 160 -27 178 -23 19 -58 21 -166 12z
-                                                                                        m166 -178 c3 -82 1 -158 -3 -167 -7 -15 -23 -18 -108 -18 -54 0 -101 4 -104 8
-                                                                                        -3 5 -8 75 -12 155 -5 114 -4 150 6 162 11 13 32 15 114 13 l101 -3 6 -150z
-                                                                                        m-252 23 l-1 -113 -17 95 c-11 58 -14 102 -9 113 20 40 28 12 27 -95z m-59 85
-                                                                                        c0 -5 9 -59 20 -122 11 -63 18 -116 16 -118 -7 -7 -67 219 -62 233 6 14 26 20
-                                                                                        26 7z m-50 -37 c0 -7 14 -58 30 -111 17 -54 29 -100 27 -102 -2 -1 -25 42 -52
-                                                                                        97 -39 82 -45 103 -35 115 16 19 30 19 30 1z m27 -222 c-7 -7 -107 150 -107
-                                                                                        167 0 41 19 22 63 -67 26 -53 46 -98 44 -100z" />
+        <div class="x" [routerLink]="['fight']">
+
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="64.000000pt" height="64.000000pt"
+                viewBox="0 0 64.000000 64.000000" preserveAspectRatio="xMidYMid meet">
+
+                <g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                    <path d="M120 523 c-61 -32 -78 -135 -31 -182 18 -18 18 -19 -9 -39 -28 -21
+           -60 -78 -60 -106 0 -29 38 -19 45 13 10 45 53 79 115 91 79 15 115 53 115 120
+           0 42 -5 54 -31 81 -39 39 -95 48 -144 22z m115 -48 c50 -49 15 -135 -55 -135
+           -41 0 -80 39 -80 80 0 41 39 80 80 80 19 0 40 -9 55 -25z" />
+                    <path d="M400 523 c-48 -25 -69 -83 -51 -142 14 -49 39 -67 111 -81 61 -12
+           105 -47 115 -91 7 -32 45 -42 45 -13 0 29 -33 85 -62 107 l-28 21 23 24 c17
+           18 22 36 22 73 0 41 -5 53 -31 80 -39 39 -94 48 -144 22z m115 -48 c16 -15 25
+           -36 25 -55 0 -19 -9 -40 -25 -55 -15 -16 -36 -25 -55 -25 -19 0 -40 9 -55 25
+           -16 15 -25 36 -25 55 0 19 9 40 25 55 15 16 36 25 55 25 19 0 40 -9 55 -25z" />
+                    <path d="M180 248 c0 -6 10 -42 22 -80 15 -47 27 -68 38 -68 11 0 23 21 38 68
+           27 84 27 92 3 92 -13 0 -21 -9 -26 -30 -4 -16 -10 -30 -15 -30 -5 0 -11 14
+           -15 30 -5 21 -13 30 -26 30 -10 0 -19 -5 -19 -12z" />
+                    <path d="M356 244 c-9 -8 -16 -24 -16 -34 0 -22 26 -50 46 -50 8 0 14 -4 14
+           -10 0 -5 -13 -7 -30 -3 -23 4 -30 2 -30 -10 0 -22 37 -40 65 -33 45 11 44 81
+           -1 92 -35 9 -30 25 6 18 18 -4 30 -2 30 4 0 17 -30 42 -50 42 -10 0 -26 -7
+           -34 -16z" />
+                </g>
+            </svg>
+
+        </div>
+        <div class="flex-1">
+            <div class="nav-item d-inline-block mx-2" [routerLink]="['league']">
+                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="48.000000pt" height="48.000000pt"
+                    viewBox="0 0 48.000000 48.000000" preserveAspectRatio="xMidYMid meet">
+
+                    <g transform="translate(0.000000,48.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                        <path d="M41 393 c1 -54 73 -193 100 -193 8 0 25 -13 37 -30 19 -25 30 -30 62
+               -30 32 0 43 5 62 30 12 16 29 30 38 30 21 0 100 151 100 191 l0 29 -200 0
+               -200 0 1 -27z m91 -68 c1 -30 2 -55 1 -55 -4 0 -32 57 -43 85 -8 22 -7 25 14
+               25 22 0 24 -5 28 -55z m258 30 c-13 -35 -41 -88 -44 -83 -1 1 0 27 2 56 4 47
+               6 52 28 52 21 0 22 -3 14 -25z" />
+                        <path d="M140 80 c0 -19 7 -20 100 -20 93 0 100 1 100 20 0 19 -7 20 -100 20
+               -93 0 -100 -1 -100 -20z" />
                     </g>
                 </svg>
-                <span class="d-none d-md-inline">Digibles</span>
+                <span class="d-none d-md-inline-block">League</span>
             </div>
-            <div class="nav-item d-inline mx-4">
-                <svg class="mr-1" version="1.0" xmlns="http://www.w3.org/2000/svg" width="50.000000pt"
-                    height="46.000000pt" viewBox="0 0 50.000000 46.000000" preserveAspectRatio="xMidYMid meet">
-                    <g transform="translate(0.000000,46.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-                        <path
-                            d="M305 453 c-61 -5 -149 -31 -197 -58 -58 -33 -108 -80 -108 -103 0
-                                                                                        -10 40 -77 88 -148 79 -114 92 -129 120 -132 20 -2 42 4 60 18 23 17 51 24
-                                                                                        117 29 119 9 117 5 113 204 -3 153 -4 160 -27 178 -23 19 -58 21 -166 12z
-                                                                                        m166 -178 c3 -82 1 -158 -3 -167 -7 -15 -23 -18 -108 -18 -54 0 -101 4 -104 8
-                                                                                        -3 5 -8 75 -12 155 -5 114 -4 150 6 162 11 13 32 15 114 13 l101 -3 6 -150z
-                                                                                        m-252 23 l-1 -113 -17 95 c-11 58 -14 102 -9 113 20 40 28 12 27 -95z m-59 85
-                                                                                        c0 -5 9 -59 20 -122 11 -63 18 -116 16 -118 -7 -7 -67 219 -62 233 6 14 26 20
-                                                                                        26 7z m-50 -37 c0 -7 14 -58 30 -111 17 -54 29 -100 27 -102 -2 -1 -25 42 -52
-                                                                                        97 -39 82 -45 103 -35 115 16 19 30 19 30 1z m27 -222 c-7 -7 -107 150 -107
-                                                                                        167 0 41 19 22 63 -67 26 -53 46 -98 44 -100z" />
+            <div class="nav-item d-inline-block mx-2" [routerLink]="['profile']">
+                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="48.000000pt" height="48.000000pt"
+                    viewBox="0 0 48.000000 48.000000" preserveAspectRatio="xMidYMid meet">
+
+                    <g transform="translate(0.000000,48.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                        <path d="M220 370 l0 -110 -30 0 -31 0 38 -55 c21 -30 40 -54 43 -54 3 0 22
+               24 43 54 l38 55 -31 0 -30 0 0 110 c0 103 -1 110 -20 110 -19 0 -20 -7 -20
+               -110z" />
+                        <path d="M132 453 c-45 -22 -106 -94 -120 -141 -28 -91 -8 -167 63 -237 102
+               -103 243 -101 338 5 88 98 90 219 3 317 -22 25 -55 52 -73 59 -42 18 -43 18
+               -43 -6 0 -12 13 -25 36 -36 131 -62 135 -266 7 -345 -57 -36 -154 -34 -210 3
+               -76 50 -107 136 -83 224 14 49 64 109 106 124 14 6 24 18 24 30 0 24 -5 24
+               -48 3z" />
                     </g>
                 </svg>
-                <span class="d-none d-md-inline">Collectors</span>
+
+                <span class="d-none d-md-inline-block">SignIn</span>
             </div>
         </div>
     </div>

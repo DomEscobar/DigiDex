@@ -1,8 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DigiblesComponent } from './digibles/digibles.component';
+import { DigiblesComponent } from './digibles.component';
 import { RouterModule, Routes } from '@angular/router';
-
 
 const routes: Routes = [
   {

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  digibleApiUrl: "https://digi.lokon.workers.dev/"
+  moralisKey: "F9wGra19WowWur1mrTy6secjExcLDrZ6bWmRtlZq",
+  serverURL: "https://vb6lkygfdzrj.moralis.io:2053/server"
 };
 
 /*

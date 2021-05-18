@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { DigibleApi } from '../../+services/digible.api';
+import { Observable, from } from 'rxjs';
+import { MoralisService, DigiCollectors } from '../../+services/moralis.service';
 
 @Component({
   selector: 'app-collectors',
@@ -9,10 +9,10 @@ import { DigibleApi } from '../../+services/digible.api';
 })
 export class CollectorsComponent {
 
-  public collectors$: Observable<any[]> | undefined;
+  public collectors$: Observable<DigiCollectors[]> | undefined;
 
-  constructor(private readonly _digibleApi: DigibleApi) {
-    this.collectors$ = this._digibleApi.getCollectors();
+  constructor(private readonly _moralis: MoralisService) {
+    this.collectors$ = from(this._moralis.getList<DigiCollectors>(DigiCollectors.createEmpty(), 200));
   }
 
 }

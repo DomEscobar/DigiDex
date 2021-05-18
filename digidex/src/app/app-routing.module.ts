@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
@@ -16,6 +15,15 @@ const routes: Routes = [
   }, {
     path: 'digibles',
     loadChildren: () => import('./digibles/digibles.module').then(m => m.DigiblesModule)
+  }, {
+    path: 'fight',
+    loadChildren: () => import('./fight/fight.module').then(m => m.FightModule)
+  }, {
+    path: 'league',
+    loadChildren: () => import('./league/league.module').then(m => m.LeagueModule)
+  }, {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
   }
 
 ];

@@ -1,0 +1,8 @@
+<div class="mt-4">
+    <div class="profile-container" *ngIf="collector$ | async as collector">
+        <img-lazy src="{{collector.img}}"></img-lazy>
+
+        {{collector.name}}
+    </div>
+
+</div>

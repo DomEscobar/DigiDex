@@ -5,14 +5,29 @@ nav
     border-bottom-left-radius: 40px
     opacity: 0.9
 
-.nav-item
+.flex-1
+    flex: 1
+    display: flex
+
+.nav-body
+    max-width: 800px
+    margin: auto
+
+    .nav-item
+        flex: 1
+        display: flex
+
+    span
+        margin-left: 1rem
+
     svg
         width: 32px
         height: 64px
 
-.x
-    width: 64px
-    padding: 2rem
-    background: #fff8eb
-    border-radius: 20px
-    box-shadow: 1px 1px 5px 0px #d6d6d6
+    .x
+        padding: 1rem
+        background: #fff8eb
+        border-radius: 20px
+        box-shadow: 1px 1px 5px 0px #d6d6d6
+        margin-bottom: -15px
+        margin-top: -15px
