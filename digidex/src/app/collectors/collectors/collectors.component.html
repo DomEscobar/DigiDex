@@ -1,0 +1,5 @@
+<div class=" row" id="row">
+    <div class="col-6 col-md-3 mb-4" *ngFor="let collector of collectors$  | async">
+        <collector-card name="{{collector.name}}" amount="0"></collector-card>
+    </div>
+</div>

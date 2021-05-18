@@ -1,0 +1,6 @@
+<div class=" row" id="row">
+    <div class="col-6 col-md-3 mb-4" *ngFor="let digible of digibles$  | async">
+        <digi-card name="{{digible.name}}" image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" power="N/A"
+            price="N/A"></digi-card>
+    </div>
+</div>
