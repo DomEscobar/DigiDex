@@ -1,5 +1,5 @@
 <div class=" row" id="row">
     <div class="col-6 col-md-3 mb-4" *ngFor="let collector of collectors$  | async">
-        <collector-card name="{{collector.name}}" amount="0"></collector-card>
+        <collector-card [routerLink]="['/profile', collector.tid]" image="{{collector.img}}" name="{{collector.name}}" amount="{{collector.cards?.length}}"></collector-card>
     </div>
 </div>

@@ -88,24 +88,34 @@
                 </svg>
                 <span class="d-none d-md-inline-block">League</span>
             </div>
-            <div class="nav-item d-inline-block mx-2" [routerLink]="['profile']">
-                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="48.000000pt" height="48.000000pt"
-                    viewBox="0 0 48.000000 48.000000" preserveAspectRatio="xMidYMid meet">
 
-                    <g transform="translate(0.000000,48.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-                        <path d="M220 370 l0 -110 -30 0 -31 0 38 -55 c21 -30 40 -54 43 -54 3 0 22
-               24 43 54 l38 55 -31 0 -30 0 0 110 c0 103 -1 110 -20 110 -19 0 -20 -7 -20
-               -110z" />
-                        <path d="M132 453 c-45 -22 -106 -94 -120 -141 -28 -91 -8 -167 63 -237 102
-               -103 243 -101 338 5 88 98 90 219 3 317 -22 25 -55 52 -73 59 -42 18 -43 18
-               -43 -6 0 -12 13 -25 36 -36 131 -62 135 -266 7 -345 -57 -36 -154 -34 -210 3
-               -76 50 -107 136 -83 224 14 49 64 109 106 124 14 6 24 18 24 30 0 24 -5 24
-               -48 3z" />
-                    </g>
-                </svg>
+            <div class="nav-item d-inline-block mx-2" (click)="signIn()">
+                <ng-container *ngIf="isLogged$ | async; else logged">
+                    Me
+                </ng-container>
+                <ng-template #logged>
+                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="48.000000pt" height="48.000000pt"
+                        viewBox="0 0 48.000000 48.000000" preserveAspectRatio="xMidYMid meet">
 
-                <span class="d-none d-md-inline-block">SignIn</span>
+                        <g transform="translate(0.000000,48.000000) scale(0.100000,-0.100000)" fill="#000000"
+                            stroke="none">
+                            <path d="M220 370 l0 -110 -30 0 -31 0 38 -55 c21 -30 40 -54 43 -54 3 0 22
+           24 43 54 l38 55 -31 0 -30 0 0 110 c0 103 -1 110 -20 110 -19 0 -20 -7 -20
+           -110z" />
+                            <path d="M132 453 c-45 -22 -106 -94 -120 -141 -28 -91 -8 -167 63 -237 102
+           -103 243 -101 338 5 88 98 90 219 3 317 -22 25 -55 52 -73 59 -42 18 -43 18
+           -43 -6 0 -12 13 -25 36 -36 131 -62 135 -266 7 -345 -57 -36 -154 -34 -210 3
+           -76 50 -107 136 -83 224 14 49 64 109 106 124 14 6 24 18 24 30 0 24 -5 24
+           -48 3z" />
+                        </g>
+                    </svg>
+                    <span class="d-none d-md-inline-block">SignIn</span>
+                </ng-template>
+
             </div>
+
+
+
         </div>
     </div>
 </nav>

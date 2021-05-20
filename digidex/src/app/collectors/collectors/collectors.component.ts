@@ -12,7 +12,7 @@ export class CollectorsComponent {
   public collectors$: Observable<DigiCollectors[]> | undefined;
 
   constructor(private readonly _moralis: MoralisService) {
-    this.collectors$ = from(this._moralis.getList<DigiCollectors>(DigiCollectors.createEmpty(), 200));
+    this.collectors$ = from(this._moralis.getCollectors());
   }
 
 }

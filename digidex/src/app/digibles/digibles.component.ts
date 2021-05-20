@@ -12,7 +12,7 @@ export class DigiblesComponent implements OnInit {
   public digibles$: Observable<DigiNft[]> | undefined;
 
   constructor(private readonly _moralis: MoralisService) {
-    this.digibles$ = from(this._moralis.getList<DigiNft>(DigiNft.createEmpty(), 100));
+    this.digibles$ = from(this._moralis.getDigibles());
   }
 
   ngOnInit(): void {

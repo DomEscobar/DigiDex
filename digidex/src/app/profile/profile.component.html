@@ -1,8 +1,18 @@
-<div class="mt-4">
-    <div class="profile-container" *ngIf="collector$ | async as collector">
-        <img-lazy src="{{collector.img}}"></img-lazy>
+<ng-container *ngIf="collector$ | async as collector">
+    <div class="background">
+        <div class="profile-container">
+            <img-lazy rounded="true" src="{{collector.img}}"></img-lazy>
 
-        {{collector.name}}
+            <h4>
+                {{collector.name}}
+            </h4>
+        </div>
     </div>
-
-</div>
+    <!--TODO a-component-->
+    <div class="row mt-5">
+        <div class="col-6 col-md-3 mb-4" *ngFor="let digible of collector.cards">
+            <digi-card name="{{digible.name}}" image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}"
+                power="{{digible.power}}" price="{{digible.price}}"></digi-card>
+        </div>
+    </div>
+</ng-container>

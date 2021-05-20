@@ -21,6 +21,21 @@ export class MoralisService {
         return ratings;
     }
 
+    public async getDigibles(): Promise<DigiNft[]> {
+        const ratings = await Moralis.Cloud.run("digibles", {});
+        return ratings;
+    }
+
+    public async getCollectors(): Promise<DigiCollectors[]> {
+        const ratings = await Moralis.Cloud.run("collectors", {});
+        return ratings;
+    }
+
+    public async getCollector(id: string): Promise<DigiCollectors> {
+        const collector = await Moralis.Cloud.run("collector", { tid: id });
+        return collector;
+    }
+
     public async loginWithMetaMask(): Promise<void> {
         try {
             let user = Moralis.User.current();
@@ -72,6 +87,17 @@ export class MoralisService {
         return resultList;
     }
 
+
+    public mapTo<T>(keyObj: any, o: any): T {
+        const newValue = {} as any;
+
+        Object.keys(keyObj).forEach(key => {
+            newValue[key] = o.get(key);
+        })
+
+        return newValue;
+    }
+
     public async getItem<T>(keyObj: any, key: string, equalsValue: string): Promise<T> {
         const query = new Moralis.Query(keyObj.constructor.name);
         query.equalTo(key, equalsValue);
@@ -86,7 +112,13 @@ export class MoralisService {
     }
 
     public getUser(): User {
-        return Moralis.User.current();
+        const currentUser = Moralis.User.current();
+        return currentUser;
+    }
+
+    public getCurrentEthAddress(): string {
+        const currentUser = Moralis.User.current();
+        return currentUser.get("ethAddress");
     }
 
     public async setUserAttribute(name: string, value: string): Promise<void> {
@@ -116,9 +148,11 @@ export class UserAttribute {
 }
 
 export class DigiNft {
+    public power?: string;
     constructor(
         public owner: string | undefined,
         public name: string | undefined,
+        public price: string | undefined,
         public tid: string | undefined,
         public img: string | undefined,
         public isPhysical: boolean | undefined
@@ -130,12 +164,16 @@ export class DigiNft {
             undefined,
             undefined,
             undefined,
+            undefined,
             false
         );
     }
 }
 
 export class DigiCollectors {
+
+    public cards?: DigiNft[]
+
     constructor(
         public tid: string | undefined,
         public name: string | undefined,
