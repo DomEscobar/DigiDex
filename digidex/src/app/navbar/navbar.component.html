@@ -91,7 +91,21 @@
 
             <div class="nav-item d-inline-block mx-2" (click)="signIn()">
                 <ng-container *ngIf="isLogged$ | async; else logged">
-                    Me
+                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="48.000000pt" height="48.000000pt"
+                        viewBox="0 0 48.000000 48.000000" preserveAspectRatio="xMidYMid meet">
+
+                        <g transform="translate(0.000000,48.000000) scale(0.100000,-0.100000)" fill="#000000"
+                            stroke="none">
+                            <path d="M172 429 c-48 -14 -109 -80 -123 -131 -23 -89 12 -182 88 -229 57
+-36 154 -34 210 3 62 41 88 90 88 168 0 77 -26 127 -85 166 -43 29 -125 39
+-178 23z m112 -65 c20 -20 20 -68 0 -88 -20 -20 -68 -20 -88 0 -20 20 -20 68
+0 88 8 9 28 16 44 16 16 0 36 -7 44 -16z m16 -174 c20 -5 45 -17 55 -25 19
+-14 19 -16 -12 -44 -57 -53 -148 -53 -206 -1 -37 33 -32 43 29 65 47 17 87 18
+134 5z" />
+                        </g>
+                    </svg>
+                    <span class="d-none d-md-inline-block">Profile</span>
+
                 </ng-container>
                 <ng-template #logged>
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="48.000000pt" height="48.000000pt"

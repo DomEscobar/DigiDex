@@ -21,5 +21,9 @@ export class ProfileComponent {
     const id = this._activatedRoute.snapshot.paramMap.get('id') || "";
     this.isLogged$ = this._moralis.isLogged$;
     this.collector$ = from(this._moralis.getCollector(id));
+
+    scrollTo({
+      top: 0
+    })
   }
 }

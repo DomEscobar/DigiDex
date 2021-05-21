@@ -1,18 +1,24 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DigiblesComponent } from './digibles.component';
 import { RouterModule, Routes } from '@angular/router';
+import { DigibleDetailComponent } from './digible-detail/digible-detail.component';
 
 const routes: Routes = [
   {
     path: '',
     component: DigiblesComponent
+  },
+  {
+    path: ':id',
+    component: DigibleDetailComponent
   }
 ];
 
 @NgModule({
   declarations: [
-    DigiblesComponent
+    DigiblesComponent,
+    DigibleDetailComponent
   ],
   imports: [
     CommonModule,

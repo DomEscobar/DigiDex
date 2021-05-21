@@ -1,0 +1,85 @@
+.image-container
+    text-align: center
+    width: 100%
+
+.pricebox
+    padding: .5rem
+    background: #fffefd
+    border-radius: 10px
+    margin: auto
+    min-width: 80px
+    text-align: center
+    margin-bottom: 1rem
+
+.card-container
+    max-width: 256px
+    position: relative
+    margin: auto
+
+    .vault
+        position: absolute
+        margin-top: -2rem
+        right: 0px
+        padding: -2px
+        background: white
+        border-radius: 9px
+        padding: 5px
+        width: 40px
+
+.card
+    animation-name: anim
+    animation-duration: 12s
+    animation-iteration-count: infinite
+    box-shadow: 5px 9px 15px 1px #cacaca
+    margin: auto
+    width: 100%
+
+@keyframes anim
+    0%
+        transform: rotateY( 0deg )
+        box-shadow: 5px 9px 15px 1px #cacaca
+
+    25%
+        transform: rotateY( 20deg )
+        box-shadow: 15px 9px 15px 1px #cacaca
+
+    75%
+        transform: rotateY( -20deg )
+        box-shadow: -13px 15px 15px 1px #cacaca
+
+    100%
+        transform: rotateY( 0deg )
+        box-shadow: 5px 9px 15px 1px #cacaca
+
+.text-power
+    text-align: center
+    padding: 1rem
+    margin-top: -1rem
+    min-width: 85px
+    line-height: 16px
+    position: relative
+    color: rgb(255, 255, 255)
+    font-weight: 700
+    text-shadow: rgb(255 255 255) 0px 1px 0px, rgb(201 201 201) 0px 2px 0px, rgb(187 187 187) 0px 3px 0px, rgb(185 185 185) 0px 4px 0px, rgb(183 183 183) 0px 5px 0px, rgb(0 0 0 / 10%) 0px 6px 1px, rgb(0 0 0 / 10%) 0px 0px 5px, rgb(0 0 0 / 30%) 0px 1px 3px, rgb(0 0 0 / 20%) 0px 3px 5px, rgb(0 0 0 / 25%) 0px 5px 10px, rgb(0 0 0 / 0%) 0px 10px 10px, rgb(0 0 0 / 0%) 0px 20px 20px
+
+.text-power::after
+    content: "POWER"
+    position: absolute
+    z-index: -1
+    left: 0px
+    color: rgb(0, 0, 0)
+    opacity: 0.1
+    top: 2px
+    width: 100%
+
+.profile-container
+    text-align: center
+
+    h4
+        color: #d4c3af
+        margin-top: 1rem
+
+    img-lazy
+        width: 100px
+        border-radius: 50%
+        margin: auto

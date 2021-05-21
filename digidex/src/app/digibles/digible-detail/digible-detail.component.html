@@ -1,0 +1,41 @@
+<ng-container *ngIf="digible$ | async as digible">
+    <div class="row mt-2">
+
+        <div class="col-12">
+            <h2 class="text-center w-100 mb-2 pt-4">{{digible.name}} <a target="_blank"
+                    [href]="'https://goerli.etherscan.io/token/0xd68a8abeb9b7435a2652680a767c382de857ed6b?a='+digible.tid">#{{digible.tid}}</a>
+            </h2>
+            <div class="text-center">
+                <div class="pricebox d-inline-block mb-1">{{digible.price}} $</div>
+
+            </div>
+        </div>
+
+        <div class="image-container col-12 col-lg-6">
+            <div class="card-container">
+                <div [ngClass]="{'card' : hasNoZoom$|async}">
+                    <img class="img-zoomable" [src]="'https://ipfs.arkerlabs.com/ipfs/'+digible.img" />
+                </div>
+                <img class="vault" src="assets/vault.png" />
+
+                <br>
+                <a target="_blank" href="https://dev.digible.io/details/{{digible.tid}}">Open on Digible</a>
+            </div>
+        </div>
+
+        <div class="info-container col-12 col-lg-6 mt-5">
+            <h1 class="text-power">
+                {{digible.power}}
+            </h1>
+            <hr>
+            <div class="text-center mt-4" *ngIf="collector$ | async as collector">
+                <div class="profile-container" [routerLink]="['/profile',collector.tid]">
+                    <img-lazy rounded="true" src="{{collector.img}}"></img-lazy>
+                    <h4>
+                        {{collector.name}}
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
