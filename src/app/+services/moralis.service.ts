@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from '../../environments/environment.prod';
-declare const Moralis: any;
+import * as Moralis from 'moralis';
 Moralis.initialize(environment.moralisKey);
 Moralis.serverURL = environment.serverURL;
 
