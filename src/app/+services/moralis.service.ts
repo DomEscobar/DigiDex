@@ -21,8 +21,8 @@ export class MoralisService {
         return ratings;
     }
 
-    public async getDigible(id:string): Promise<DigiNft> {
-        const digible = await Moralis.Cloud.run("digible",  { tid: id });
+    public async getDigible(id: string): Promise<DigiNft> {
+        const digible = await Moralis.Cloud.run("digible", { tid: id });
         return digible;
     }
 
@@ -43,7 +43,7 @@ export class MoralisService {
 
     public async loginWithMetaMask(): Promise<void> {
         try {
-            let user = Moralis.User.current();
+            let user = await Moralis.User.current();
             if (!user) {
                 await Moralis.Web3.authenticate();
             }
@@ -154,8 +154,8 @@ export class UserAttribute {
 
 export class DigiNft {
     public power?: string;
-    public specialType?:string;
-    
+    public specialType?: string;
+
     constructor(
         public owner: string | undefined,
         public name: string | undefined,
