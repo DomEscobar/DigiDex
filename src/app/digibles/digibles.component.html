@@ -1,6 +1,23 @@
 <div class="row">
-    <div class="col-6 col-md-3 mb-4" *ngFor="let digible of digibles$  | async">
-        <digi-card [routerLink]="['/digibles', digible.tid]" name="{{digible.name}}" image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" power="{{digible.power}}" bgTitle="{{digible.specialType}}"
-            price="{{digible.price}}"></digi-card>
-    </div>
+
+    <ng-container *ngIf="digibles$  | async as digibles;else loadings">
+        <div class="col-6 col-md-3 mb-4" *ngFor="let digible of digibles">
+            <digi-card [routerLink]="['/digibles', digible.tid]" name="{{digible.name}}"
+                image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" power="{{digible.power}}"
+                bgTitle="{{digible.specialType}}" price="{{digible.price}}"></digi-card>
+        </div>
+    </ng-container>
+
+    <ng-template #loadings>
+        <div class="col-6 col-md-3 mb-4" *ngFor="let digible of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]">
+
+            <ngx-skeleton-loader [theme]="{ 
+              'border-radius': '10px',
+              height: '246px',
+              'box-shadow': 'rgb(173 173 173 / 26%) 0px 0px 20px 0px',
+              'background-color': '#fdfbf3'
+            }"></ngx-skeleton-loader>
+
+        </div>
+    </ng-template>
 </div>

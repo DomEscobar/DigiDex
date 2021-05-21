@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DigiblesComponent } from './digibles.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DigibleDetailComponent } from './digible-detail/digible-detail.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    NgxSkeletonLoaderModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

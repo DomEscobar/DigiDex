@@ -1,5 +1,24 @@
 <div class=" row" id="row">
-    <div class="col-6 col-md-3 mb-4" *ngFor="let collector of collectors$  | async">
-        <collector-card [routerLink]="['/profile', collector.tid]" image="{{collector.img}}" name="{{collector.name}}" amount="{{collector.cards?.length}}"></collector-card>
-    </div>
+
+    <ng-container *ngIf="collectors$  | async as collectors;else loadings">
+        <div class="col-6 col-md-3 mb-4" *ngFor="let collector of collectors">
+
+            <collector-card [routerLink]="['/profile', collector.tid]" image="{{collector.img}}"
+                name="{{collector.name}}" amount="{{collector.cards?.length}}"></collector-card>
+
+        </div>
+    </ng-container>
+
+    <ng-template #loadings>
+        <div class="col-6 col-md-3 mb-4" *ngFor="let digible of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]">
+
+            <ngx-skeleton-loader [theme]="{ 
+          'border-radius': '10px',
+          height: '126px',
+          'box-shadow': 'rgb(173 173 173 / 26%) 0px 0px 20px 0px',
+          'background-color': '#fdfbf3'
+        }"></ngx-skeleton-loader>
+
+        </div>
+    </ng-template>
 </div>
