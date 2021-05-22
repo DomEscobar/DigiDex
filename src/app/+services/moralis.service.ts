@@ -223,7 +223,7 @@ export class DigiCollectors {
 
 
 export class WorldUser {
-
+    id?:string;
     constructor(
         public x: string | undefined,
         public y: string | undefined,

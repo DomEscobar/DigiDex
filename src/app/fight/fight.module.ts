@@ -2,7 +2,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FightComponent } from './fight.component';
 import { Routes, RouterModule } from '@angular/router';
-import { PlayerComponent } from './player/player.component';
+import { PlayerComponent } from './open-world-test/player/player.component';
+import { OpenWorldTestComponent } from './open-world-test/open-world-test.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     FightComponent,
-    PlayerComponent
+    PlayerComponent,
+    OpenWorldTestComponent
   ],
   imports: [
     CommonModule,
