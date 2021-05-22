@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment.prod';
 declare const Moralis: any;
 Moralis.initialize(environment.moralisKey);
@@ -10,7 +10,7 @@ Moralis.serverURL = environment.serverURL;
 })
 export class MoralisService {
 
-    public isLogged$ = new Subject<boolean>();
+    public isLogged$ = new BehaviorSubject<boolean>(false);
 
     constructor() {
         this.isLogged$.next(Moralis.User?.current() != undefined)
@@ -19,6 +19,11 @@ export class MoralisService {
     public async getEvents(): Promise<any> {
         const ratings = await Moralis.Cloud.run("events", {});
         return ratings;
+    }
+
+    public async randomName(): Promise<string> {
+        const name = await Moralis.Cloud.run("randomName", {});
+        return name;
     }
 
     public async getDigible(id: string): Promise<DigiNft> {
@@ -75,6 +80,18 @@ export class MoralisService {
         return await transQuery.find();
     }
 
+    public async add(objToSave: any): Promise<void> {
+        const saveExtendObj = Moralis.Object.extend(objToSave.constructor.name);
+
+        const event = new saveExtendObj();
+
+        Object.keys(objToSave).forEach(key => {
+            event.set(key, objToSave[key]);
+        })
+
+        await event.save();
+    }
+
     public async getList<T>(keyObj: any, top = 50): Promise<T[]> {
         const query = new Moralis.Query(keyObj.constructor.name);
         query.limit(top);
@@ -103,10 +120,18 @@ export class MoralisService {
         return newValue;
     }
 
-    public async getItem<T>(keyObj: any, key: string, equalsValue: string): Promise<T> {
+    public async getItem<T>(keyObj: any, key: string, equalsValue: string, asDataObj?: boolean): Promise<T | undefined> {
         const query = new Moralis.Query(keyObj.constructor.name);
         query.equalTo(key, equalsValue);
         const queryResult = (await query.first()) as any;
+
+        if (queryResult == undefined) {
+            return undefined;
+        }
+
+        if (asDataObj) {
+            return queryResult;
+        }
 
         const newValue = {} as any;
         Object.keys(keyObj).forEach(key => {
@@ -189,6 +214,26 @@ export class DigiCollectors {
 
     static createEmpty(): DigiCollectors {
         return new DigiCollectors(
+            undefined,
+            undefined,
+            undefined
+        );
+    }
+}
+
+
+export class WorldUser {
+
+    constructor(
+        public x: string | undefined,
+        public y: string | undefined,
+        public name: string | undefined,
+        public tid: string | undefined
+    ) { }
+
+    static createEmpty(): WorldUser {
+        return new WorldUser(
+            undefined,
             undefined,
             undefined,
             undefined

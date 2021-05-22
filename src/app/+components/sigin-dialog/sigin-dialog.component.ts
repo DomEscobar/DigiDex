@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MoralisService } from '../../+services/moralis.service';
+import { MoralisService, User, DigiCollectors } from '../../+services/moralis.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class SiginDialogComponent {
 
   public isLogged$: Observable<boolean> | undefined;
-
+  
   constructor(
     private readonly _moralis: MoralisService) {
     this.isLogged$ = this._moralis.isLogged$;
@@ -18,9 +18,18 @@ export class SiginDialogComponent {
   public async signInMetamask(): Promise<void> {
     try {
       await this._moralis.loginWithMetaMask();
+      let user = await this._moralis.getItem(DigiCollectors.createEmpty(), "tid", this._moralis.getCurrentEthAddress())
+
+      if (user == undefined) {
+        user = new DigiCollectors(
+          this._moralis.getCurrentEthAddress(),
+          await this._moralis.randomName(),
+          undefined
+        );
+        await this._moralis.add(user);
+      }
     } catch (error) {
       console.log(error);
     }
   }
 }
-

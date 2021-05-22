@@ -1,1 +1,9 @@
-<h2 class="mt-4" style="text-align: center;">Available soon!</h2>
+<div class="map-container">
+    <div class="map">
+        <div *ngIf="meWorldUser$ | async as meWorldUser" class="player" [style.top.px]="meWorldUser.y"
+            [style.LEFT.px]="meWorldUser.x">
+            <label>{{meWorldUser.name}}</label>
+            <app-player></app-player>
+        </div>
+    </div>
+</div>
