@@ -1,0 +1,106 @@
+<div class="battle-field">
+    <div class="enemy-container d-flex">
+        <div class="align-self-start w-100">
+
+            <div class="profile-container text-right" *ngIf="enemy">
+
+                <div class="float-left">
+                    <div class="d-inline-block prev-container" *ngFor="let data of enemyTeam">
+                        <img [ngClass]="{'op5' : data.isDead}" class="prev-img"
+                            [src]="'https://ipfs.arkerlabs.com/ipfs/' + data.img" />
+                    </div>
+                </div>
+
+                <div class="img" style="text-align: right;
+                display: inline-block;">
+                    <img-lazy rounded="true" src="{{enemy.img}}"></img-lazy>
+                    <label>
+                        {{enemy.name}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="card-container">
+
+                <div class="battle-stats d-flex flex-column justify-center pt-0">
+                    <ng-container *ngIf="enemyCard">
+                        <div class="text-center d-flex flex-column justify-content-center m-1 rounded "
+                            [ngClass]="{'op5' : isPlayerturn}" *ngFor="let attack of enemyCard.attacks">
+                            <div>
+                                <label>
+                                    {{attack.name}}
+                                </label>
+
+                                <h5>{{attack.strength}}</h5>
+                            </div>
+                        </div>
+                        <div class="mt-2 health">
+                            <h4 class="mt-2">{{enemyCard.hp}}</h4>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="selected-card pt-0">
+
+                    <div class="battle-card  p-4" style="padding-top: 0px !important;" *ngIf="enemyCard">
+                        <img class="battle-img enemyAni" [src]="'https://ipfs.arkerlabs.com/ipfs/'+enemyCard.img" />
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="player-container d-flex">
+
+        <div class="align-self-end w-100">
+
+            <div class="card-container">
+                <div class="selected-card">
+
+                    <div class="battle-card p-4" *ngIf="playerCard">
+                        <img class="battle-img playerAni" [src]="'https://ipfs.arkerlabs.com/ipfs/'+playerCard.img" />
+                    </div>
+
+                </div>
+                <div class="battle-stats d-flex flex-column justify-center">
+                    <ng-container *ngIf="playerCard">
+                        <div class="mb-2 health">
+                            <h4>{{playerCard.hp}}</h4>
+                        </div>
+                        <div class="text-center d-flex flex-column justify-content-center m-1 rounded"
+                            [ngClass]="{'op5' : !isPlayerturn}" *ngFor="let attack of playerCard.attacks"
+                            (click)="onAttack(attack, true)">
+                            <div>
+                                <label>
+                                    {{attack.name}}
+                                </label>
+
+                                <h5>{{attack.strength}}</h5>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="profile-container" *ngIf="player">
+
+                <div class="float-right mt-2">
+                    <div class="d-inline-block prev-container" *ngFor="let data of playerTeam">
+                        <img [ngClass]="{'op5' : data.isDead}" class="prev-img"
+                            [src]="'https://ipfs.arkerlabs.com/ipfs/' + data.img" />
+                    </div>
+                </div>
+                <div class="img">
+                    <img-lazy rounded="true" src="{{player.img}}"></img-lazy>
+                    <label>
+                        {{player.name}}
+                    </label>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

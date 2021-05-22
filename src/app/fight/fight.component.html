@@ -1,1 +1,14 @@
-<app-open-world-test></app-open-world-test>
+<h2>My team (DEMO)</h2>
+<div class="row myteam-container">
+    <div class="card col-4" *ngFor="let digible of myTeam$ | async">
+        <div class="card-body">
+            <digi-card [routerLink]="['/digibles', digible.tid]" name="{{digible.name}}"
+                image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" power="100" bgTitle="{{digible.specialType}}">
+            </digi-card>
+
+        </div>
+    </div>
+</div>
+<hr>
+
+<button class="btn btn-primary w-100" (click)="onAttack()">Attack</button>

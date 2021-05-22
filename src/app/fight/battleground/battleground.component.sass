@@ -1,0 +1,110 @@
+.profile-container
+    flex: 1
+    font-size: 12px
+
+    .img
+        width: 42px
+
+.enemy-container
+    flex: 1
+
+.player-container
+    flex: 1
+
+.card-container
+    flex: 1
+    display: flex
+
+    .selected-card
+        flex: 1
+        padding: 1.2rem
+
+        .battle-card
+            text-align: center
+
+            .battle-img
+                width: 100%
+                max-width: 256px
+                -webkit-transform: perspective(980px) rotateY(25deg)
+                transform: perspective(980px) rotateY(25deg)
+                -webkit-box-shadow: 4px 13px 14px 0 #868686
+                box-shadow: 4px 13px 14px 0 #868686
+
+    .battle-stats
+        flex: 1
+        padding: 1.2rem
+
+        h4
+            text-align: center
+
+        .text-center
+            flex: 1
+            box-shadow: 1px 3px 4px #bfbfbf9c
+            border-radius: 15px
+            cursor: pointer
+
+.battle-field
+    height: calc(100vh - 100px)
+    display: flex
+    flex-direction: column
+    max-width: 600px
+    margin: auto
+
+.playerAni
+    animation-name: anim
+    animation-duration: 5s
+    animation-iteration-count: infinite
+
+@keyframes anim
+    0%
+        -webkit-transform: perspective(980px) rotateY(25deg) translateY(0px)
+        transform: perspective(980px) rotateY(25deg) translateY(0px)
+        -webkit-box-shadow: 4px 13px 14px 0 #868686
+        box-shadow: 4px 13px 14px 0 #868686
+    50%
+        -webkit-transform: perspective(980px) rotateY(30deg) translateY(10px)
+        transform: perspective(980px) rotateY(30deg) translateY(10px)
+        -webkit-box-shadow: 4px 23px 14px 0 #868686
+        box-shadow: 4px 13px 24px 0 #868686
+
+    100%
+        -webkit-transform: perspective(980px) rotateY(25deg) translateY(0px)
+        transform: perspective(980px) rotateY(25deg) translateY(0px)
+        -webkit-box-shadow: 4px 13px 14px 0 #868686
+        box-shadow: 4px 13px 14px 0 #868686
+
+.enemyAni
+    animation-name: enemyAni
+    animation-duration: 5s
+    animation-iteration-count: infinite
+
+@keyframes enemyAni
+    0%
+        -webkit-transform: perspective(980px) rotateY(-25deg) translateY(0px)
+        transform: perspective(980px) rotateY(-25deg) translateY(0px)
+        -webkit-box-shadow: 4px 13px 14px 0 #868686
+        box-shadow: 4px 13px 14px 0 #868686
+    50%
+        -webkit-transform: perspective(980px) rotateY(-30deg) translateY(10px)
+        transform: perspective(980px) rotateY(-30deg) translateY(10px)
+        -webkit-box-shadow: 4px 23px 14px 0 #868686
+        box-shadow: 4px 13px 24px 0 #868686
+
+    100%
+        -webkit-transform: perspective(980px) rotateY(-25deg) translateY(0px)
+        transform: perspective(980px) rotateY(-25deg) translateY(0px)
+        -webkit-box-shadow: 4px 13px 14px 0 #868686
+        box-shadow: 4px 13px 14px 0 #868686
+
+.health
+    background: #fffae7
+    border-radius: 10px
+
+.op5
+    opacity: 0.3
+
+.prev-container
+    margin-left: 1rem
+
+    .prev-img
+        width: 32px

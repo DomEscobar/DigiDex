@@ -21,6 +21,11 @@ export class MoralisService {
         return ratings;
     }
 
+    public async attack(strength: number): Promise<boolean> {
+        const succ = await Moralis.Cloud.run("attack", { strength: strength });
+        return succ;
+    }
+
     public async randomName(): Promise<string> {
         const name = await Moralis.Cloud.run("randomName", {});
         return name;
@@ -92,9 +97,12 @@ export class MoralisService {
         await event.save();
     }
 
-    public async getList<T>(keyObj: any, top = 50): Promise<T[]> {
+    public async getList<T>(keyObj: any, top = 50, key?: string, equalsValue?: string): Promise<T[]> {
         const query = new Moralis.Query(keyObj.constructor.name);
         query.limit(top);
+        if (key && equalsValue) {
+            query.equalTo(key, equalsValue);
+        }
         const queryResult = (await query.find()) as any[];
 
         const resultList = [] as any;
@@ -223,7 +231,7 @@ export class DigiCollectors {
 
 
 export class WorldUser {
-    id?:string;
+    id?: string;
     constructor(
         public x: string | undefined,
         public y: string | undefined,
@@ -235,6 +243,39 @@ export class WorldUser {
         return new WorldUser(
             undefined,
             undefined,
+            undefined,
+            undefined
+        );
+    }
+}
+
+export class BattleAttack {
+    constructor(
+        public name?: string,
+        public strength?: string,
+        public tid?: string
+    ) {
+
+    }
+
+    static createEmpty(): BattleAttack {
+        return new BattleAttack(
+            undefined,
+            undefined,
+            undefined
+        );
+    }
+}
+export class BattleStats {
+    constructor(
+        public hp?: string,
+        public tid?: string
+    ) {
+
+    }
+
+    static createEmpty(): BattleStats {
+        return new BattleStats(
             undefined,
             undefined
         );
