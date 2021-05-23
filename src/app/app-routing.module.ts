@@ -3,11 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
-
-  { path: '', redirectTo: 'digibles', pathMatch: 'full' },
-
   {
-    path: 'welcome',
+    path: '',
     component: WelcomeComponent
   }, {
     path: 'collectors',
