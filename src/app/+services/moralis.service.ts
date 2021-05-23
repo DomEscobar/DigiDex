@@ -97,8 +97,8 @@ export class MoralisService {
         await event.save();
     }
 
-    public async getList<T>(keyObj: any, top = 50, key?: string, equalsValue?: string): Promise<T[]> {
-        const query = new Moralis.Query(keyObj.constructor.name);
+    public async getList<T>(keyObj: MoralisObject, top = 50, key?: string, equalsValue?: string): Promise<T[]> {
+        const query = new Moralis.Query(keyObj.getClassname());
         query.limit(top);
         if (key && equalsValue) {
             query.equalTo(key, equalsValue);
@@ -128,8 +128,8 @@ export class MoralisService {
         return newValue;
     }
 
-    public async getItem<T>(keyObj: any, key: string, equalsValue: string, asDataObj?: boolean): Promise<T | undefined> {
-        const query = new Moralis.Query(keyObj.constructor.name);
+    public async getItem<T>(keyObj: MoralisObject, key: string, equalsValue: string, asDataObj?: boolean): Promise<T | undefined> {
+        const query = new Moralis.Query(keyObj.getClassname());
         query.equalTo(key, equalsValue);
         const queryResult = (await query.first()) as any;
 
@@ -166,11 +166,18 @@ export class MoralisService {
     }
 }
 
+interface MoralisObject {
+    getClassname(): string;
+}
 
-export class User {
+export class User implements MoralisObject {
     className?: string;
     id?: string;
     attribute?: UserAttribute;
+
+    getClassname(): string {
+        return "User";
+    }
 }
 
 export class UserAttribute {
@@ -185,9 +192,13 @@ export class UserAttribute {
     email?: string;
 }
 
-export class DigiNft {
+export class DigiNft implements MoralisObject{
     public power?: string;
     public specialType?: string;
+
+    getClassname(): string {
+        return "DigiNft";
+    }
 
     constructor(
         public owner: string | undefined,
@@ -210,9 +221,13 @@ export class DigiNft {
     }
 }
 
-export class DigiCollectors {
+export class DigiCollectors implements MoralisObject{
 
-    public cards?: DigiNft[]
+    public cards?: DigiNft[];
+
+    getClassname(): string {
+        return "DigiCollectors";
+    }
 
     constructor(
         public tid: string | undefined,
@@ -230,8 +245,13 @@ export class DigiCollectors {
 }
 
 
-export class WorldUser {
+export class WorldUser implements MoralisObject{
     id?: string;
+
+    getClassname(): string {
+        return "WorldUser";
+    }
+
     constructor(
         public x: string | undefined,
         public y: string | undefined,
@@ -249,13 +269,18 @@ export class WorldUser {
     }
 }
 
-export class BattleAttack {
+export class BattleAttack implements MoralisObject {
+
     constructor(
         public name?: string,
         public strength?: string,
         public tid?: string
     ) {
 
+    }
+
+    getClassname(): string {
+        return "BattleAttack";
     }
 
     static createEmpty(): BattleAttack {
@@ -266,12 +291,16 @@ export class BattleAttack {
         );
     }
 }
-export class BattleStats {
+export class BattleStats implements MoralisObject{
     constructor(
         public hp?: string,
         public tid?: string
     ) {
 
+    }
+
+    getClassname(): string {
+        return "BattleStats";
     }
 
     static createEmpty(): BattleStats {
