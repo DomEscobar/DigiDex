@@ -31,6 +31,12 @@ export class BattlegroundComponent implements OnInit {
   private _battleLog$ = new BehaviorSubject("");
   public battleLog$?: Observable<string> | undefined;
 
+  public playerCardAni = "playerAni";
+  public enemyCardAni = "enemyAni";
+
+  public enemyText?: string;
+  public playerText?: string;
+
   constructor(
     private readonly _router: Router,
     private readonly dialog: MatDialog,
@@ -58,14 +64,14 @@ export class BattlegroundComponent implements OnInit {
   private async setPlayerCard(index: number) {
     this.playerCard = this.playerTeam[index];
     await this.fetchCardStats(this.playerCard);
-
+    await this.animatePlayer("pulse", 1000);
     this._battleLog$.next("GO " + this.playerCard.name);
   }
 
   private async setEnemyCard(index: number) {
     this.enemyCard = this.enemyTeam[index];
     await this.fetchCardStats(this.enemyCard);
-
+    await this.animateEnemy("pulse", 1000);
     this._battleLog$.next("Enemy sets " + this.enemyCard.name);
   }
 
@@ -84,30 +90,30 @@ export class BattlegroundComponent implements OnInit {
   private async checkDeath() {
     if (Number(this.enemyCard?.hp) <= 0 && this.enemyCard) {
       this.enemyCard.isDead = true;
-      await sleep(1000);
+      await sleep(500);
       this._battleLog$.next(this.enemyCard.name + " defeted");
-      await sleep(1000);
+      await sleep(500);
 
       let index = this.enemyTeam.findIndex(o => o.tid == this.enemyCard?.tid);
 
       this.isGameFinished = index == this.enemyTeam.length - 1;
 
       if (!this.isGameFinished) {
-        this.setEnemyCard(index + 1)
+        await this.setEnemyCard(index + 1)
       }
     }
 
     if (Number(this.playerCard?.hp) <= 0 && this.playerCard) {
       this.playerCard.isDead = true;
       let index = this.playerTeam.findIndex(o => o.tid == this.playerCard?.tid);
-      await sleep(1000);
+      await sleep(500);
       this._battleLog$.next(this.playerCard.name + " defeted");
-      await sleep(1000);
+      await sleep(500);
 
       this.isGameFinished = index == this.playerTeam.length - 1;
 
       if (!this.isGameFinished) {
-        this.setPlayerCard(index + 1)
+        await this.setPlayerCard(index + 1)
       }
     }
 
@@ -119,24 +125,35 @@ export class BattlegroundComponent implements OnInit {
 
   public async onAttack(attack: BattleAttack, playerTurn?: boolean, event?: Event) {
 
-    
+
     if (event) {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
-    
+
     if (this.isPlayerturn == !playerTurn || this.isRunningAction) {
       return;
     }
     this.isRunningAction = true;
-    
+
     this._battleLog$.next((playerTurn ? "YOU : " : "Enemy : ") + attack.name);
+
+    if (this.isPlayerturn) {
+      await this.animatePlayer("playerAttack", 500);
+    } else {
+      await this.animateEnemy("enemyAttack", 500);
+    }
 
     const success = await this._moralis.attack(Number(attack.strength));
 
     if (!success) {
-      await sleep(1000);
       this._battleLog$.next(attack.name + " missed!");
+    } else {
+      if (!this.isPlayerturn) {
+        await this.animatePlayer("shake", 200);
+      } else {
+        await this.animateEnemy("shake", 200);
+      }
     }
 
     if (success && this.enemyCard != undefined && this.playerCard != undefined) {
@@ -154,7 +171,7 @@ export class BattlegroundComponent implements OnInit {
     this.isRunningAction = false;
 
     if (!this.isPlayerturn) {
-      await sleep(1000);
+      await sleep(500);
       this.enemyChooseAttack();
     }
   }
@@ -166,7 +183,17 @@ export class BattlegroundComponent implements OnInit {
     }
   }
 
+  private async animatePlayer(aniClass: string, ms: number) {
+    this.playerCardAni = aniClass;
+    await sleep(ms);
+    this.playerCardAni = "playerAni";
+  }
 
+  private async animateEnemy(aniClass: string, ms: number) {
+    this.enemyCardAni = aniClass;
+    await sleep(ms);
+    this.enemyCardAni = "enemyAni";
+  }
 }
 
 export class BattleCard extends DigiNft {

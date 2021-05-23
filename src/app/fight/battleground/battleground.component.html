@@ -8,6 +8,8 @@
                     <div class="d-inline-block prev-container" *ngFor="let data of enemyTeam">
                         <img [ngClass]="{'op5' : data.isDead}" class="prev-img"
                             [src]="'https://ipfs.arkerlabs.com/ipfs/' + data.img" />
+
+                        <div class="card-text" *ngIf="enemyText">{{enemyText}}</div>
                     </div>
                 </div>
 
@@ -24,6 +26,9 @@
 
                 <div class="battle-stats d-flex flex-column justify-center pt-0">
                     <ng-container *ngIf="enemyCard">
+                        <div class="mb-2 health">
+                            <h4>{{enemyCard.hp}} HP</h4>
+                        </div>
                         <div class="text-center d-flex flex-column justify-content-center m-1 rounded "
                             [ngClass]="{'op5' : isPlayerturn}" *ngFor="let attack of enemyCard.attacks">
                             <div>
@@ -34,15 +39,16 @@
                                 <h5 class="mb-0">{{attack.strength}}</h5>
                             </div>
                         </div>
-                        <div class="mt-2 health">
-                            <h4 class="mt-2">{{enemyCard.hp}}</h4>
-                        </div>
+
                     </ng-container>
                 </div>
                 <div class="selected-card pt-0">
 
                     <div class="battle-card  p-4" style="padding-top: 0px !important;" *ngIf="enemyCard">
-                        <img class="battle-img enemyAni" [src]="'https://ipfs.arkerlabs.com/ipfs/'+enemyCard.img" />
+                        <img class="battle-img {{enemyCardAni}}"
+                            [src]="'https://ipfs.arkerlabs.com/ipfs/'+enemyCard.img" />
+                        <div class="card-text" *ngIf="playerText">{{playerText}}</div>
+
                     </div>
 
                 </div>
@@ -51,8 +57,8 @@
         </div>
     </div>
 
-    <div class="battle-log text-center p-2" *ngIf="battleLog$ | async as log">
-        {{log}}
+    <div class="battle-log text-center p-2 " *ngIf="battleLog$ | async as log">
+        <div class="pulse">{{log}}</div>
     </div>
 
     <div class="player-container d-flex">
@@ -63,14 +69,15 @@
                 <div class="selected-card">
 
                     <div class="battle-card p-4" *ngIf="playerCard">
-                        <img class="battle-img playerAni" [src]="'https://ipfs.arkerlabs.com/ipfs/'+playerCard.img" />
+                        <img class="battle-img {{playerCardAni}}"
+                            [src]="'https://ipfs.arkerlabs.com/ipfs/'+playerCard.img" />
                     </div>
 
                 </div>
                 <div class="battle-stats d-flex flex-column justify-center">
                     <ng-container *ngIf="playerCard">
                         <div class="mb-2 health">
-                            <h4>{{playerCard.hp}}</h4>
+                            <h4>{{playerCard.hp}} HP</h4>
                         </div>
                         <div class="text-center d-flex flex-column justify-content-center m-1 rounded"
                             [ngClass]="{'op5' : !isPlayerturn}" *ngFor="let attack of playerCard.attacks"

@@ -3,7 +3,7 @@
     <div class="card col-4" *ngFor="let digible of myTeam$ | async">
         <div class="card-body">
             <digi-card [routerLink]="['/digibles', digible.tid]" name="{{digible.name}}"
-                image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" power="100" bgTitle="{{digible.specialType}}">
+                image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" bgTitle="{{digible.specialType}}">
             </digi-card>
 
         </div>
