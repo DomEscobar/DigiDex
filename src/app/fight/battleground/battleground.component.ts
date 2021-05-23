@@ -37,8 +37,8 @@ export class BattlegroundComponent implements OnInit {
   async ngOnInit() {
     await this.setPlayerCard(0);
     await this.setEnemyCard(0);
-    this.enemy = await this._moralis.getCollector("0xC4F4f936c4364Da7ECA5eEaCc6CD9F1C735a0839");
-    this.player = await this._moralis.getCollector("0x000000000000000000000000000000000000dEaD");//TODOme
+    this.enemy = await this._moralis.getCollector('0xC4F4f936c4364Da7ECA5eEaCc6CD9F1C735a0839');
+    this.player = await this._moralis.getCollector('0x000000000000000000000000000000000000dEaD');//TODOme
   }
 
   private clone(obj: any) {

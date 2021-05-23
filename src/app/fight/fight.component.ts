@@ -20,10 +20,9 @@ export class FightComponent {
   }
 
   async ngOnInit() {
-    // MOCK TEAM
-    const one = await this._moralis.getItem<DigiNft>(DigiNft.createEmpty(), "tid", "5");
-    const two = await this._moralis.getItem<DigiNft>(DigiNft.createEmpty(), "tid", "6");
-    const three = await this._moralis.getItem<DigiNft>(DigiNft.createEmpty(), "tid", "4");
+    const one = await this._moralis.getItem<DigiNft>(DigiNft.createEmpty(), 'tid', '5');
+    const two = await this._moralis.getItem<DigiNft>(DigiNft.createEmpty(), 'tid', '6');
+    const three = await this._moralis.getItem<DigiNft>(DigiNft.createEmpty(), 'tid', '4');
 
     if (one && two && three) {
       this.myTeam$.next([one, two, three]);
@@ -32,6 +31,6 @@ export class FightComponent {
 
   onAttack() {
     this._fightService.myTeam = this.myTeam$.getValue();
-    this._router.navigate(["fight/attack"]);
+    this._router.navigate(['fight/attack']);
   }
 }
