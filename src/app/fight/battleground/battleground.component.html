@@ -98,7 +98,7 @@
 
                 <div class="float-right mt-2">
                     <div class="d-inline-block prev-container" *ngFor="let data of playerTeam">
-                        <img [ngClass]="{'op5' : data.isDead}" class="prev-img"
+                        <img [ngClass]="{'op5' : data.isDead}" class="prev-img" (click)="onSwitch(data)"
                             [src]="'https://ipfs.arkerlabs.com/ipfs/' + data.img" />
                     </div>
                 </div>

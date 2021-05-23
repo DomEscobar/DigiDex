@@ -105,15 +105,15 @@ export class BattlegroundComponent implements OnInit {
 
     if (Number(this.playerCard?.hp) <= 0 && this.playerCard) {
       this.playerCard.isDead = true;
-      let index = this.playerTeam.findIndex(o => o.tid == this.playerCard?.tid);
       await sleep(500);
       this._battleLog$.next(this.playerCard.name + " defeted");
       await sleep(500);
 
-      this.isGameFinished = index == this.playerTeam.length - 1;
+      this.isGameFinished = this.playerTeam.filter(o => !o.isDead).length == 0;
 
       if (!this.isGameFinished) {
-        await this.setPlayerCard(index + 1)
+        const nextCard = this.playerTeam.find(o => !o.isDead);
+        await this.setPlayerCard(this.playerTeam.findIndex(o => nextCard ? o.tid == nextCard.tid : undefined))
       }
     }
 
@@ -177,6 +177,16 @@ export class BattlegroundComponent implements OnInit {
       await sleep(500);
       this.enemyChooseAttack();
     }
+  }
+
+  public async onSwitch(card: BattleCard) {
+    if (card.isDead) {
+      return;
+    }
+
+    await this.setPlayerCard(this.playerTeam.findIndex(o => o.tid == card.tid));
+    this.isPlayerturn = !this.isPlayerturn;
+    this.enemyChooseAttack();
   }
 
   private enemyChooseAttack() {
