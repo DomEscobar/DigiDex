@@ -9,7 +9,6 @@
                         <img [ngClass]="{'op5' : data.isDead}" class="prev-img"
                             [src]="'https://ipfs.arkerlabs.com/ipfs/' + data.img" />
 
-                        <div class="card-text" *ngIf="enemyText">{{enemyText}}</div>
                     </div>
                 </div>
 
@@ -47,7 +46,7 @@
                     <div class="battle-card  p-4" style="padding-top: 0px !important;" *ngIf="enemyCard">
                         <img class="battle-img {{enemyCardAni}}"
                             [src]="'https://ipfs.arkerlabs.com/ipfs/'+enemyCard.img" />
-                        <div class="card-text" *ngIf="playerText">{{playerText}}</div>
+                        <div class="card-text" *ngIf="enemyText">{{enemyText}}</div>
 
                     </div>
 
@@ -71,6 +70,7 @@
                     <div class="battle-card p-4" *ngIf="playerCard">
                         <img class="battle-img {{playerCardAni}}"
                             [src]="'https://ipfs.arkerlabs.com/ipfs/'+playerCard.img" />
+                            <div class="card-text" *ngIf="playerText">{{playerText}}</div>
                     </div>
 
                 </div>

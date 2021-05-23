@@ -63,15 +63,15 @@ export class BattlegroundComponent implements OnInit {
 
   private async setPlayerCard(index: number) {
     this.playerCard = this.playerTeam[index];
+    this.animatePlayer("pulse", 200);
     await this.fetchCardStats(this.playerCard);
-    await this.animatePlayer("pulse", 1000);
     this._battleLog$.next("GO " + this.playerCard.name);
   }
 
   private async setEnemyCard(index: number) {
     this.enemyCard = this.enemyTeam[index];
+    this.animateEnemy("pulse", 200);
     await this.fetchCardStats(this.enemyCard);
-    await this.animateEnemy("pulse", 1000);
     this._battleLog$.next("Enemy sets " + this.enemyCard.name);
   }
 
@@ -148,12 +148,15 @@ export class BattlegroundComponent implements OnInit {
 
     if (!success) {
       this._battleLog$.next(attack.name + " missed!");
+      this.isPlayerturn ? this.textEnemy("Attack missed") : this.textPlayer("Attack missed");
     } else {
       if (!this.isPlayerturn) {
         await this.animatePlayer("shake", 200);
       } else {
         await this.animateEnemy("shake", 200);
       }
+
+      this.isPlayerturn ? this.textEnemy("-" + attack.strength) : this.textPlayer("-" + attack.strength);
     }
 
     if (success && this.enemyCard != undefined && this.playerCard != undefined) {
@@ -193,6 +196,18 @@ export class BattlegroundComponent implements OnInit {
     this.enemyCardAni = aniClass;
     await sleep(ms);
     this.enemyCardAni = "enemyAni";
+  }
+
+  private async textPlayer(text: string, ms: number = 500) {
+    this.playerText = text;
+    await sleep(ms);
+    this.playerText = undefined;
+  }
+
+  private async textEnemy(text: string, ms: number = 500) {
+    this.enemyText = text;
+    await sleep(ms);
+    this.enemyText = undefined;
   }
 }
 
