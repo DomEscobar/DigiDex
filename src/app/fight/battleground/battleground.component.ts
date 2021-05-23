@@ -4,6 +4,8 @@ import { FightService } from '../fight.service';
 import { MoralisService, DigiNft, BattleStats, BattleAttack, DigiCollectors } from '../../+services/moralis.service';
 import { MatDialog } from '@angular/material/dialog';
 import { GameEndDialogComponent } from './game-end-dialog/game-end-dialog.component';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { bufferTime, debounceTime, delay, throttleTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-battleground',
@@ -24,6 +26,10 @@ export class BattlegroundComponent implements OnInit {
   public isPlayerturn = true;
 
   public isGameFinished?: boolean;
+  public isRunningAction?: boolean;
+
+  private _battleLog$ = new BehaviorSubject("");
+  public battleLog$?: Observable<string> | undefined;
 
   constructor(
     private readonly _router: Router,
@@ -32,6 +38,8 @@ export class BattlegroundComponent implements OnInit {
     private readonly _moralis: MoralisService) {
     this.playerTeam = this.clone(this._fightService.myTeam);
     this.enemyTeam = this.clone(this._fightService.myTeam);
+
+    this.battleLog$ = this._battleLog$.asObservable();
   }
 
   async ngOnInit() {
@@ -39,6 +47,8 @@ export class BattlegroundComponent implements OnInit {
     await this.setEnemyCard(0);
     this.enemy = await this._moralis.getCollector('0xC4F4f936c4364Da7ECA5eEaCc6CD9F1C735a0839');
     this.player = await this._moralis.getCollector('0x000000000000000000000000000000000000dEaD');//TODOme
+
+    this._battleLog$.next(this.player.name + " vs " + this.enemy.name);
   }
 
   private clone(obj: any) {
@@ -48,11 +58,15 @@ export class BattlegroundComponent implements OnInit {
   private async setPlayerCard(index: number) {
     this.playerCard = this.playerTeam[index];
     await this.fetchCardStats(this.playerCard);
+
+    this._battleLog$.next("GO " + this.playerCard.name);
   }
 
   private async setEnemyCard(index: number) {
     this.enemyCard = this.enemyTeam[index];
     await this.fetchCardStats(this.enemyCard);
+
+    this._battleLog$.next("Enemy sets " + this.enemyCard.name);
   }
 
   private async fetchCardStats(card: BattleCard) {
@@ -70,6 +84,10 @@ export class BattlegroundComponent implements OnInit {
   private async checkDeath() {
     if (Number(this.enemyCard?.hp) <= 0 && this.enemyCard) {
       this.enemyCard.isDead = true;
+      await sleep(1000);
+      this._battleLog$.next(this.enemyCard.name + " defeted");
+      await sleep(1000);
+
       let index = this.enemyTeam.findIndex(o => o.tid == this.enemyCard?.tid);
 
       this.isGameFinished = index == this.enemyTeam.length - 1;
@@ -82,6 +100,9 @@ export class BattlegroundComponent implements OnInit {
     if (Number(this.playerCard?.hp) <= 0 && this.playerCard) {
       this.playerCard.isDead = true;
       let index = this.playerTeam.findIndex(o => o.tid == this.playerCard?.tid);
+      await sleep(1000);
+      this._battleLog$.next(this.playerCard.name + " defeted");
+      await sleep(1000);
 
       this.isGameFinished = index == this.playerTeam.length - 1;
 
@@ -96,13 +117,27 @@ export class BattlegroundComponent implements OnInit {
     }
   }
 
-  public async onAttack(attack: BattleAttack, playerTurn?: boolean) {
+  public async onAttack(attack: BattleAttack, playerTurn?: boolean, event?: Event) {
 
-    if (this.isPlayerturn == !playerTurn) {
+    
+    if (event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+    
+    if (this.isPlayerturn == !playerTurn || this.isRunningAction) {
       return;
     }
+    this.isRunningAction = true;
+    
+    this._battleLog$.next((playerTurn ? "YOU : " : "Enemy : ") + attack.name);
 
     const success = await this._moralis.attack(Number(attack.strength));
+
+    if (!success) {
+      await sleep(1000);
+      this._battleLog$.next(attack.name + " missed!");
+    }
 
     if (success && this.enemyCard != undefined && this.playerCard != undefined) {
 
@@ -112,15 +147,15 @@ export class BattlegroundComponent implements OnInit {
         this.playerCard.hp = "" + (Number(this.playerCard?.hp) - Number(attack.strength))
       }
 
-      this.checkDeath();
+      await this.checkDeath();
     }
 
     this.isPlayerturn = !this.isPlayerturn;
+    this.isRunningAction = false;
 
     if (!this.isPlayerturn) {
-      setTimeout(() => {
-        this.enemyChooseAttack();
-      }, 2000)
+      await sleep(1000);
+      this.enemyChooseAttack();
     }
   }
 
@@ -138,4 +173,8 @@ export class BattleCard extends DigiNft {
   public hp?: string;
   public attacks?: BattleAttack[];
   public isDead?: boolean;
+}
+
+function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }

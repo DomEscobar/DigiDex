@@ -31,7 +31,7 @@
                                     {{attack.name}}
                                 </label>
 
-                                <h5>{{attack.strength}}</h5>
+                                <h5 class="mb-0">{{attack.strength}}</h5>
                             </div>
                         </div>
                         <div class="mt-2 health">
@@ -49,6 +49,10 @@
             </div>
 
         </div>
+    </div>
+
+    <div class="battle-log text-center p-2" *ngIf="battleLog$ | async as log">
+        {{log}}
     </div>
 
     <div class="player-container d-flex">
@@ -70,13 +74,13 @@
                         </div>
                         <div class="text-center d-flex flex-column justify-content-center m-1 rounded"
                             [ngClass]="{'op5' : !isPlayerturn}" *ngFor="let attack of playerCard.attacks"
-                            (click)="onAttack(attack, true)">
+                            (click)="onAttack(attack, true,$event)">
                             <div>
                                 <label>
                                     {{attack.name}}
                                 </label>
 
-                                <h5>{{attack.strength}}</h5>
+                                <h5 class="mb-0">{{attack.strength}}</h5>
                             </div>
                         </div>
                     </ng-container>
