@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Sign in</h1>
+<h1 mat-dialog-title class="text-center">Sign in</h1>
 <div mat-dialog-content>
 
 
@@ -9,9 +9,11 @@
             <h4>
                 Successful logged
             </h4>
+          <hr>
+          <button (click)="close()">Ok</button>  
         </ng-container>
         <ng-template #logged>
-            <button class="btn btn-primary btn-sign mt-4" (click)="signInMetamask()">
+            <button class="btn btn-primary btn-sign mt-4 w-100" (click)="signInMetamask()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="212" height="189" viewBox="0 0 212 189">
                     <g fill="none" fill-rule="evenodd">
                         <polygon fill="#CDBDB2"
@@ -63,8 +65,9 @@
                         </g>
                     </g>
                 </svg>
-                Sign In
+                Metamask
             </button>
+
         </ng-template>
 
 

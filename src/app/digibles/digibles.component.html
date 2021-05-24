@@ -3,7 +3,7 @@
     <ng-container *ngIf="digibles$  | async as digibles;else loadings">
         <div class="col-6 col-md-3 mb-4" *ngFor="let digible of digibles">
             <digi-card [routerLink]="['/digibles', digible.tid]" name="{{digible.name}}"
-                image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" power="{{digible.power}}"
+                image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}"
                 bgTitle="{{digible.specialType}}" price="{{digible.price}}"></digi-card>
         </div>
     </ng-container>

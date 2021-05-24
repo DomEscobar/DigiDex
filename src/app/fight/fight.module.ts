@@ -7,6 +7,7 @@ import { OpenWorldTestComponent } from './open-world-test/open-world-test.compon
 import { BattlegroundComponent } from './battleground/battleground.component';
 import { GameEndDialogComponent } from './battleground/game-end-dialog/game-end-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CardSelectDialogComponent } from './+components/card-select-dialog/card-select-dialog.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,8 @@ const routes: Routes = [
     PlayerComponent,
     OpenWorldTestComponent,
     BattlegroundComponent,
-    GameEndDialogComponent
+    GameEndDialogComponent,
+    CardSelectDialogComponent
   ],
   imports: [
     CommonModule,

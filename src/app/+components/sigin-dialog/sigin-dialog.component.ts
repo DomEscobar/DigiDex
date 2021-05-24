@@ -1,7 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import { MoralisService, User, DigiCollectors } from '../../+services/moralis.service';
+import { Component } from '@angular/core';
+import { MoralisService, DigiCollectors } from '../../+services/moralis.service';
 import { Observable } from 'rxjs';
-
+import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-sigin-dialog',
   templateUrl: './sigin-dialog.component.html',
@@ -10,8 +10,10 @@ import { Observable } from 'rxjs';
 export class SiginDialogComponent {
 
   public isLogged$: Observable<boolean> | undefined;
-  
+  public emailSign?: EmailSign;
+
   constructor(
+    private readonly _dialogRef: MatDialogRef<SiginDialogComponent>,
     private readonly _moralis: MoralisService) {
     this.isLogged$ = this._moralis.isLogged$;
   }
@@ -26,10 +28,24 @@ export class SiginDialogComponent {
           await this._moralis.randomName(),
           undefined
         );
+
         await this._moralis.add(user);
       }
     } catch (error) {
       console.log(error);
     }
   }
+
+  public close() {
+    this._dialogRef.close();
+  }
+
+  public onActivateEmail() {
+    this.emailSign = new EmailSign();
+  }
+}
+
+class EmailSign {
+  email?: string;
+  password?: string;
 }

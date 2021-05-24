@@ -1,11 +1,25 @@
 <h2>My team (DEMO)</h2>
 <div class="row myteam-container">
-    <div class="card col-4" *ngFor="let digible of myTeam$ | async">
+    <div class="card col-4" *ngFor="let digible of myTeam$ | async; let i = index"
+        (click)="onCardOpenSelect(i, digible)">
         <div class="card-body">
-            <digi-card [routerLink]="['/digibles', digible.tid]" name="{{digible.name}}"
-                image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" bgTitle="{{digible.specialType}}">
-            </digi-card>
+            <ng-container *ngIf="digible == undefined; else selectedCard">
+                <div class="d-flex justify-content-center align-items-center" style="min-height: 180px;">
+                    <div class="text-center">
+                        <h1 class="fat-text">
+                            +
+                            <br>
+                            <span style="font-size:14px;"> Select Digible </span>
+                        </h1>
+                    </div>
+                </div>
+            </ng-container>
 
+            <ng-template #selectedCard>
+                <digi-card name="{{digible.name}}" image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}"
+                    bgTitle="{{digible.specialType}}">
+                </digi-card>
+            </ng-template>
         </div>
     </div>
 </div>
@@ -20,5 +34,4 @@
 Todos<br>
 - Conditions<br>
 - Types<br>
-- Switch card<br>
 - UI<br>

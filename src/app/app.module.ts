@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SiginDialogComponent } from './+components/sigin-dialog/sigin-dialog.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ZoomAbleDirective } from './+components/zoom-able.directive';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     WelcomeComponent,
     NavbarComponent,
-    SiginDialogComponent
+    SiginDialogComponent,
+    ZoomAbleDirective
   ],
   imports: [
     BrowserModule,

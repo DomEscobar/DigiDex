@@ -7,6 +7,7 @@ import { DigiNft } from '../+services/moralis.service';
 export class FightService {
 
   public myTeam: DigiNft[] = [];
+  public availableDigiNfts: DigiNft[] = [];
 
   constructor() { }
 }

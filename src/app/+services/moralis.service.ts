@@ -14,6 +14,13 @@ export class MoralisService {
 
     constructor() {
         this.isLogged$.next(Moralis.User?.current() != undefined)
+
+        Moralis.Web3.onAccountsChanged(async ([account]: any) => {
+            const confirmed = confirm("Link this address to your account?");
+            if (confirmed) {
+                await Moralis.Web3.link(account);
+            }
+        });
     }
 
     public async getEvents(): Promise<any> {
@@ -93,6 +100,10 @@ export class MoralisService {
         Object.keys(objToSave).forEach(key => {
             event.set(key, objToSave[key]);
         })
+
+        const acl = new Moralis.ACL(Moralis.User.current());
+        acl.setPublicReadAccess(true);
+        event.setACL(acl);
 
         await event.save();
     }
@@ -192,7 +203,7 @@ export class UserAttribute {
     email?: string;
 }
 
-export class DigiNft implements MoralisObject{
+export class DigiNft implements MoralisObject {
     public power?: string;
     public specialType?: string;
 
@@ -221,7 +232,7 @@ export class DigiNft implements MoralisObject{
     }
 }
 
-export class DigiCollectors implements MoralisObject{
+export class DigiCollectors implements MoralisObject {
 
     public cards?: DigiNft[];
 
@@ -245,7 +256,7 @@ export class DigiCollectors implements MoralisObject{
 }
 
 
-export class WorldUser implements MoralisObject{
+export class WorldUser implements MoralisObject {
     id?: string;
 
     getClassname(): string {
@@ -291,7 +302,7 @@ export class BattleAttack implements MoralisObject {
         );
     }
 }
-export class BattleStats implements MoralisObject{
+export class BattleStats implements MoralisObject {
     constructor(
         public hp?: string,
         public tid?: string

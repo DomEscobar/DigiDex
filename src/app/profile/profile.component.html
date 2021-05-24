@@ -11,8 +11,7 @@
     <!--TODO a-component-->
     <div class="row mt-5">
         <div class="col-6 col-md-3 mb-4" *ngFor="let digible of collector.cards">
-            <digi-card [routerLink]="['/digibles', digible.tid]" name="{{digible.name}}" image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}"
-                power="{{digible.power}}" price="{{digible.price}}"></digi-card>
+            <digi-card [routerLink]="['/digibles', digible.tid]" name="{{digible.name}}" image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" price="{{digible.price}}"></digi-card>
         </div>
     </div>
 </ng-container>

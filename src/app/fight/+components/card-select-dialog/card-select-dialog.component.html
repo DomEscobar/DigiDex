@@ -1,0 +1,12 @@
+<h1 mat-dialog-title class="text-center">Select a Digible</h1>
+<div mat-dialog-content>
+
+    <div class="row">
+        <div class="col-6 col-md-3 mb-4" *ngFor="let digible of availableDigiNfts"
+            [ngClass]="{'selected' : selectedDigiNft?.tid == digible.tid}">
+                <digi-card (click)="onSelectCard(digible)" name="{{digible.name}}"
+                    image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" bgTitle="{{digible.specialType}}">
+                </digi-card>
+        </div>
+    </div>
+</div>
