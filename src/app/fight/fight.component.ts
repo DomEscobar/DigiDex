@@ -64,7 +64,7 @@ export class FightComponent {
       team[index] = selectedDigible;
       this.myTeam$.next(team);
 
-      this.isDisabled = team.find(o => o == undefined) != undefined;
+      this.isDisabled = team.filter(o => o == undefined).length != 0;
     });
   }
 }
