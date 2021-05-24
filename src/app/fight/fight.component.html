@@ -1,15 +1,15 @@
 <h2>My team (DEMO)</h2>
 <div class="row myteam-container">
-    <div class="card col-4" *ngFor="let digible of myTeam$ | async; let i = index"
+    <div class="col-4" *ngFor="let digible of myTeam$ | async; let i = index"
         (click)="onCardOpenSelect(i, digible)">
-        <div class="card-body">
+        <div class="card">
             <ng-container *ngIf="digible == undefined; else selectedCard">
                 <div class="d-flex justify-content-center align-items-center" style="min-height: 180px;">
                     <div class="text-center">
-                        <h1 class="fat-text">
+                        <h1 class="fat-text text-color-bg">
                             +
                             <br>
-                            <span style="font-size:14px;"> Select Digible </span>
+                            <span> Select Digible </span>
                         </h1>
                     </div>
                 </div>
@@ -27,7 +27,9 @@
 <p class="text-center"> Note : Attacks have an accuracy of : 100% - (strength/1.5) </p>
 <hr>
 
-<button class="btn btn-primary w-100" (click)="onAttack()">Attack</button>
+<button class="btn btn-primary w-100" [ngClass]="{'isDisabled' : isDisabled}" (click)="onAttack()">Attack</button>
+
+
 <br>
 <br>
 <br>

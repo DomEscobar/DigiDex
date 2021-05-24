@@ -13,6 +13,7 @@ import { CardSelectDialogComponent } from './+components/card-select-dialog/card
 export class FightComponent {
 
   public myTeam$ = new BehaviorSubject<any[]>([undefined, undefined, undefined]);
+  public isDisabled = true;
 
   constructor(
     private readonly _dialog: MatDialog,
@@ -40,6 +41,10 @@ export class FightComponent {
   }
 
   onAttack() {
+    if (this.isDisabled) {
+      return;
+    }
+
     this._fightService.myTeam = this.myTeam$.getValue();
     this._router.navigate(['fight/attack']);
   }
@@ -58,6 +63,8 @@ export class FightComponent {
       const team = this.myTeam$.getValue();
       team[index] = selectedDigible;
       this.myTeam$.next(team);
+
+      this.isDisabled = team.find(o => o == undefined) != undefined;
     });
   }
 }
