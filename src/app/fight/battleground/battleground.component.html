@@ -26,7 +26,7 @@
                 <div class="battle-stats d-flex flex-column justify-center pt-0">
                     <ng-container *ngIf="enemyCard">
                         <div class="mb-2 health">
-                            <h4>{{enemyCard.hp}} HP</h4>
+                            <h4 class="ci">{{enemyCard.hp}} HP</h4>
                         </div>
                         <div class="text-center d-flex flex-column justify-content-center m-1 rounded "
                             [ngClass]="{'op5' : isPlayerturn}" *ngFor="let attack of enemyCard.attacks">
@@ -46,7 +46,7 @@
                     <div class="battle-card  p-4" style="padding-top: 0px !important;" *ngIf="enemyCard">
                         <img class="battle-img {{enemyCardAni}}"
                             [src]="'https://ipfs.arkerlabs.com/ipfs/'+enemyCard.img" />
-                        <div class="card-text" *ngIf="enemyText">{{enemyText}}</div>
+                        <div class="card-text ci" *ngIf="enemyText">{{enemyText}}</div>
 
                     </div>
 
@@ -70,14 +70,14 @@
                     <div class="battle-card p-4" *ngIf="playerCard">
                         <img class="battle-img {{playerCardAni}}"
                             [src]="'https://ipfs.arkerlabs.com/ipfs/'+playerCard.img" />
-                            <div class="card-text" *ngIf="playerText">{{playerText}}</div>
+                            <div class="card-text ci" *ngIf="playerText">{{playerText}}</div>
                     </div>
 
                 </div>
                 <div class="battle-stats d-flex flex-column justify-center">
                     <ng-container *ngIf="playerCard">
                         <div class="mb-2 health">
-                            <h4>{{playerCard.hp}} HP</h4>
+                            <h4 class="ci">{{playerCard.hp}} HP</h4>
                         </div>
                         <div class="text-center d-flex flex-column justify-content-center m-1 rounded"
                             [ngClass]="{'op5' : !isPlayerturn}" *ngFor="let attack of playerCard.attacks"
