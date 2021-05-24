@@ -1,8 +1,21 @@
-<h1 mat-dialog-title>Game end</h1>
-<div mat-dialog-content>
-    <p>Game finished</p>
+<h1 mat-dialog-title class="text-center">Game end</h1>
+<div mat-dialog-content class="text-center">
+    <ng-container *ngIf="isWon;else lost">
+        <span class="material-icons h1 text-success">
+            emoji_emotions
+        </span>
+        <h4 class="text-success">You win</h4>
+    </ng-container>
+    <ng-template #lost>
+        <span class="material-icons-outlined text-warning">
+            sentiment_very_dissatisfied
+        </span>
+        <span class="material-icons h1">sentiment_very_dissatisfied</span>
+
+        <h4 class="text-warning">You lost</h4>
+    </ng-template>
 </div>
 
 <div mat-dialog-actions>
-    <button class="btn btn-primary" (click)="ok()">Ok</button>
+    <button class="btn btn-primary w-100" (click)="ok()">Ok</button>
 </div>

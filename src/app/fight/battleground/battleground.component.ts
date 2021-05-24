@@ -119,6 +119,9 @@ export class BattlegroundComponent implements OnInit {
 
     if (this.isGameFinished) {
       this.dialog.open(GameEndDialogComponent, {
+        data: { isWon: this.enemyTeam.filter(o => !o.isDead).length == 0 },
+        disableClose: true,
+        width: "350px"
       }).afterClosed().subscribe(() => this._router.navigate(["/fight"]));
     }
   }
