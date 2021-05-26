@@ -1,7 +1,7 @@
 <h5>My team (DEMO)</h5>
 <div class="row myteam-container">
     <div class="col-4" *ngFor="let digible of myTeam$ | async; let i = index" (click)="onCardOpenSelect(i, digible)">
-        <div class="card">
+        <div class="card data-augmented-ui" data-augmented-ui="tl-clip br-clip tr-clip br-clip        ">
             <ng-container *ngIf="digible == undefined; else selectedCard">
                 <div class="d-flex justify-content-center align-items-center" style="min-height: 180px;">
                     <div class="text-center">
@@ -15,21 +15,26 @@
             </ng-container>
 
             <ng-template #selectedCard>
-                <digi-card name="{{digible.name}}" image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}"
+                <digi-card name="{{digible.name}}" image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" bgTitle="{{digible.specialType}}"
                     bgTitle="{{digible.specialType}}">
                 </digi-card>
             </ng-template>
         </div>
     </div>
 </div>
-<hr>
-<p class="text-center"> Note : Attacks have an accuracy of : 100% - (strength/1.5) </p>
-<hr>
+<p class="text-center my-4" style="color:#007bff"> <span class="h1"> ! </span> Attacks have an accuracy of : 100% - (strength/1.5) </p>
 
-<button class="btn btn-primary w-100 ci" [ngClass]="{'isDisabled' : isDisabled}" (click)="onAttack()">
-    Attack
-</button>
-
+<div class="text-center">
+    <h3>Select a match</h3>
+    <div class="d-flex" >
+        <button class="btn btn-primary w-100 ci f-1" (click)="onAttack()" [ngClass]="{'isDisabled' : isDisabled}">
+            Offline
+        </button>
+        <button class="btn btn-primary w-100 ci f-1 isDisabled" (click)="onLive()" >
+            Live
+        </button>
+    </div>
+</div>
 
 <br>
 <br>

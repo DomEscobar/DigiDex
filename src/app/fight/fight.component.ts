@@ -14,6 +14,7 @@ export class FightComponent {
 
   public myTeam$ = new BehaviorSubject<any[]>([undefined, undefined, undefined]);
   public isDisabled = true;
+  public areAnyAvailable?: boolean;
 
   constructor(
     private readonly _dialog: MatDialog,
@@ -28,15 +29,16 @@ export class FightComponent {
   }
 
   async ngOnInit() {
-    const one = await this._moralis.getItem<DigiNft>(DigiNft.createEmpty(), 'tid', '5');
-    const two = await this._moralis.getItem<DigiNft>(DigiNft.createEmpty(), 'tid', '6');
-    const three = await this._moralis.getItem<DigiNft>(DigiNft.createEmpty(), 'tid', '4');
-    const fr = await this._moralis.getItem<DigiNft>(DigiNft.createEmpty(), 'tid', '29');
-    const u = await this._moralis.getItem<DigiNft>(DigiNft.createEmpty(), 'tid', '22');
+    const one = await this._moralis.getDigible('5');
+    const two = await this._moralis.getDigible('6');
+    const three = await this._moralis.getDigible('4');
+    const fr = await this._moralis.getDigible('29');
+    const u = await this._moralis.getDigible('22');
 
 
     if (one && two && three && fr && u) {
       this._fightService.availableDigiNfts = [one, two, three, fr, u];
+      this.areAnyAvailable = true;
     }
   }
 
@@ -49,10 +51,20 @@ export class FightComponent {
     this._router.navigate(['fight/attack']);
   }
 
+  onLive() {
+    alert("Not available yet")
+  }
+
   onCardOpenSelect(index: number, digible: any) {
+
+    if (!this.areAnyAvailable) {
+      alert("You have no Digibles available");
+      return;
+    }
+
     this._dialog.open(CardSelectDialogComponent, {
       disableClose: true,
-      width: "1200px"
+      width: "800px"
     }).afterClosed().subscribe(selectedDigible => {
 
       // removed slot

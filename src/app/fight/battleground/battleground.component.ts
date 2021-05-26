@@ -55,6 +55,12 @@ export class BattlegroundComponent implements OnInit {
     this.player = await this._moralis.getCollector('0x000000000000000000000000000000000000dEaD');//TODOme
 
     this._battleLog$.next(this.player.name + " vs " + this.enemy.name);
+
+    this.dialog.open(GameEndDialogComponent, {
+      data: { isWon: this.enemyTeam.filter(o => !o.isDead).length == 0 },
+      disableClose: true,
+      width: "350px"
+    }).afterClosed().subscribe(() => this._router.navigate(["/fight"]));
   }
 
   private clone(obj: any) {

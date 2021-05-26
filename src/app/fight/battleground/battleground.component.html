@@ -15,9 +15,6 @@
                 <div class="img" style="text-align: right;
                 display: inline-block;">
                     <img-lazy rounded="true" src="{{enemy.img}}"></img-lazy>
-                    <label>
-                        {{enemy.name}}
-                    </label>
                 </div>
             </div>
 
@@ -31,7 +28,7 @@
                         <div class="text-center d-flex flex-column justify-content-center m-1 rounded "
                             [ngClass]="{'op5' : isPlayerturn}" *ngFor="let attack of enemyCard.attacks">
                             <div>
-                                <label>
+                                <label class="mb-0">
                                     {{attack.name}}
                                 </label>
 
@@ -83,7 +80,7 @@
                             [ngClass]="{'op5' : !isPlayerturn}" *ngFor="let attack of playerCard.attacks"
                             (click)="onAttack(attack, true,$event)">
                             <div>
-                                <label>
+                                <label class="mb-0">
                                     {{attack.name}}
                                 </label>
 
@@ -104,9 +101,6 @@
                 </div>
                 <div class="img">
                     <img-lazy rounded="true" src="{{player.img}}"></img-lazy>
-                    <label>
-                        {{player.name}}
-                    </label>
                 </div>
 
             </div>

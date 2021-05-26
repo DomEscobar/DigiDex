@@ -204,8 +204,6 @@ export class UserAttribute {
 }
 
 export class DigiNft implements MoralisObject {
-    public power?: string;
-    public specialType?: string;
 
     getClassname(): string {
         return "DigiNft";
@@ -217,7 +215,10 @@ export class DigiNft implements MoralisObject {
         public price: string | undefined,
         public tid: string | undefined,
         public img: string | undefined,
-        public isPhysical: boolean | undefined
+        public isPhysical: boolean | undefined,
+        public specialType: string | undefined,
+        public power: string | undefined
+
     ) { }
 
     static createEmpty(): DigiNft {
@@ -227,7 +228,9 @@ export class DigiNft implements MoralisObject {
             undefined,
             undefined,
             undefined,
-            false
+            false, 
+            undefined, 
+            undefined
         );
     }
 }
