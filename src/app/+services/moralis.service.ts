@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment.prod';
+import { CardType } from '../+models/card.type';
 declare const Moralis: any;
 Moralis.initialize(environment.moralisKey);
 Moralis.serverURL = environment.serverURL;
@@ -28,9 +29,16 @@ export class MoralisService {
         return ratings;
     }
 
-    public async attack(strength: number): Promise<boolean> {
-        const succ = await Moralis.Cloud.run("attack", { strength: strength });
+    //todo ss only
+    public async checkMissed(strength: number): Promise<boolean> {
+        const succ = await Moralis.Cloud.run("checkMissed", { strength: strength });
         return succ;
+    }
+
+    //todo ss only
+    public async calcHp(hp: number, strength: number, attackerType: string, defenderType: string): Promise<string> {
+        const restHp = await Moralis.Cloud.run("calcHp", { hp, strength, attackerType, defenderType });
+        return restHp;
     }
 
     public async randomName(): Promise<string> {
@@ -228,8 +236,8 @@ export class DigiNft implements MoralisObject {
             undefined,
             undefined,
             undefined,
-            false, 
-            undefined, 
+            false,
+            undefined,
             undefined
         );
     }
@@ -308,6 +316,7 @@ export class BattleAttack implements MoralisObject {
 export class BattleStats implements MoralisObject {
     constructor(
         public hp?: string,
+        public type?: string,
         public tid?: string
     ) {
 

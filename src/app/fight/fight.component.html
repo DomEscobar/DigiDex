@@ -1,4 +1,4 @@
-<h5>My team (DEMO)</h5>
+<h5>My Team</h5>
 <div class="row myteam-container">
     <div class="col-4" *ngFor="let digible of myTeam$ | async; let i = index" (click)="onCardOpenSelect(i, digible)">
         <div class="card data-augmented-ui" data-augmented-ui="tl-clip br-clip tr-clip br-clip        ">
@@ -22,7 +22,10 @@
         </div>
     </div>
 </div>
-<p class="text-center my-4" style="color:#007bff"> <span class="h1"> ! </span> Attacks have an accuracy of <br> 100% - (strength/1.5) </p>
+
+<div class="alert alert-info text-center mt-4" role="alert">
+    Attacks have an accuracy of <br> 100% - (strength/1.5) 
+</div>
 
 <div class="text-center">
     <h3>Select a match</h3>
@@ -35,11 +38,3 @@
         </button>
     </div>
 </div>
-
-<br>
-<br>
-<br>
-Todos<br>
-- Conditions<br>
-- Types<br>
-- UI<br>

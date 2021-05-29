@@ -8,6 +8,7 @@ import { BattlegroundComponent } from './battleground/battleground.component';
 import { GameEndDialogComponent } from './battleground/game-end-dialog/game-end-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CardSelectDialogComponent } from './+components/card-select-dialog/card-select-dialog.component';
+import { StrengthPipe } from './battleground/strength.pipe';
 
 const routes: Routes = [
   {
@@ -27,7 +28,8 @@ const routes: Routes = [
     OpenWorldTestComponent,
     BattlegroundComponent,
     GameEndDialogComponent,
-    CardSelectDialogComponent
+    CardSelectDialogComponent,
+    StrengthPipe
   ],
   imports: [
     CommonModule,

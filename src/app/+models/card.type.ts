@@ -1,0 +1,1 @@
+export type CardType = "fire" | "psy" | "thunder" | "water"

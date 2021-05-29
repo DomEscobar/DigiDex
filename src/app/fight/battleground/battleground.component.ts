@@ -5,7 +5,7 @@ import { MoralisService, DigiNft, BattleStats, BattleAttack, DigiCollectors } fr
 import { MatDialog } from '@angular/material/dialog';
 import { GameEndDialogComponent } from './game-end-dialog/game-end-dialog.component';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { bufferTime, debounceTime, delay, throttleTime } from 'rxjs/operators';
+import { isStrongAgainst } from './weaknes.util';
 
 @Component({
   selector: 'app-battleground',
@@ -66,13 +66,23 @@ export class BattlegroundComponent implements OnInit {
     this.animatePlayer("pulse", 200);
     await this.fetchCardStats(this.playerCard);
     this._battleLog$.next("GO " + this.playerCard.name);
+    this.detectWeakness();
   }
 
   private async setEnemyCard(index: number) {
     this.enemyCard = this.enemyTeam[index];
     this.animateEnemy("pulse", 200);
     await this.fetchCardStats(this.enemyCard);
+    this.enemyCard.isStrongAgainst = isStrongAgainst(this.enemyCard?.type || "", this.playerCard?.type || "");
     this._battleLog$.next("Enemy sets " + this.enemyCard.name);
+    this.detectWeakness();
+  }
+
+  private detectWeakness() {
+    if (this.playerCard && this.enemyCard) {
+      this.playerCard.isStrongAgainst = isStrongAgainst(this.playerCard?.type || "", this.enemyCard?.type || "");
+      this.enemyCard.isStrongAgainst = isStrongAgainst(this.enemyCard?.type || "", this.playerCard?.type || "");
+    }
   }
 
   private async fetchCardStats(card: BattleCard) {
@@ -82,6 +92,7 @@ export class BattlegroundComponent implements OnInit {
 
       if (cardStats && attacks) {
         card.hp = cardStats.hp;
+        card.type = cardStats.type;
         card.attacks = attacks;
       }
     }
@@ -147,7 +158,7 @@ export class BattlegroundComponent implements OnInit {
       await this.animateEnemy("enemyAttack", 500);
     }
 
-    const success = await this._moralis.attack(Number(attack.strength));
+    const success = await this._moralis.checkMissed(Number(attack.strength));
 
     if (!success) {
       this._battleLog$.next(attack.name + " missed!");
@@ -165,9 +176,9 @@ export class BattlegroundComponent implements OnInit {
     if (success && this.enemyCard != undefined && this.playerCard != undefined) {
 
       if (this.isPlayerturn) {
-        this.enemyCard.hp = "" + (Number(this.enemyCard?.hp) - Number(attack.strength))
+        this.enemyCard.hp = await this._moralis.calcHp(Number(this.enemyCard?.hp), Number(attack.strength), this.playerCard.type || "", this.enemyCard.type || "");
       } else {
-        this.playerCard.hp = "" + (Number(this.playerCard?.hp) - Number(attack.strength))
+        this.playerCard.hp = await this._moralis.calcHp(Number(this.playerCard?.hp), Number(attack.strength), this.enemyCard.type || "", this.playerCard.type || "");
       }
 
       await this.checkDeath();
@@ -222,12 +233,18 @@ export class BattlegroundComponent implements OnInit {
     await sleep(ms);
     this.enemyText = undefined;
   }
+
+  infor() {
+    alert('Strong against enemy')
+  }
 }
 
 export class BattleCard extends DigiNft {
   public hp?: string;
+  public type?: string;
   public attacks?: BattleAttack[];
   public isDead?: boolean;
+  public isStrongAgainst?: boolean;
 }
 
 function sleep(ms: number) {
