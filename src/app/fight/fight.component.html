@@ -15,8 +15,8 @@
             </ng-container>
 
             <ng-template #selectedCard>
-                <digi-card name="{{digible.name}}" image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" bgTitle="{{digible.specialType}}"
-                    bgTitle="{{digible.specialType}}">
+                <digi-card name="{{digible.name}}" image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}"
+                    bgTitle="{{digible.specialType}}" bgTitle="{{digible.specialType}}">
                 </digi-card>
             </ng-template>
         </div>
@@ -24,17 +24,22 @@
 </div>
 
 <div class="alert alert-info text-center mt-4" role="alert">
-    Attacks have an accuracy of <br> 100% - (strength/1.5) 
+    Attacks have an accuracy of <br> 100% - (strength/1.5)
 </div>
 
 <div class="text-center">
     <h3>Select a match</h3>
-    <div class="d-flex" >
+    <div class="d-flex">
         <button class="btn btn-primary w-100 ci f-1" (click)="onAttack()" [ngClass]="{'isDisabled' : isDisabled}">
             Offline
         </button>
-        <button class="btn btn-primary w-100 ci f-1 isDisabled" (click)="onLive()" >
+        <button class="btn btn-primary w-100 ci f-1 isDisabled" (click)="onLive()">
             Live
         </button>
     </div>
+</div>
+<hr>
+<div class="btn btn-primary text-center top isDisabled" (click)="onLive()">
+    Top 4 challenge
+    <img src="assets/top.png" />
 </div>
