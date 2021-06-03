@@ -3,7 +3,7 @@
     <ng-container *ngIf="collectors$  | async as collectors;else loadings">
         <div class="col-6 col-md-3 mb-4" *ngFor="let collector of collectors">
 
-            <collector-card [routerLink]="['/profile', collector.tid]" image="{{collector.img}}"
+            <collector-card [routerLink]="['/profile', collector.tid]" image="assets/quest.png"
                 name="{{collector.name}}" amount="{{collector.cards?.length}}"></collector-card>
 
         </div>
