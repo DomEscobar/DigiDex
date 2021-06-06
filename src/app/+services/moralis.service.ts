@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment.prod';
-import { CardType } from '../+models/card.type';
+import { getBrowserAddress } from './utils';
 declare const Moralis: any;
 Moralis.initialize(environment.moralisKey);
 Moralis.serverURL = environment.serverURL;
@@ -79,16 +79,22 @@ export class MoralisService {
         }
     }
 
-    public async loginWithEmail(email: string, password: string): Promise<void> {
+    public async loginBrowser(): Promise<void> {
+        const fprint = getBrowserAddress();
         try {
-
-            await Moralis.User.logIn(email, password);
+            await Moralis.User.logIn(fprint, fprint);
+            this.isLogged$.next(true);
         } catch (error) {
             const user = new Moralis.User();
-            user.set("username", email);
-            user.set("password", password);
+            user.set("username", fprint);
+            user.set("password", fprint);
 
-            await user.signUp();
+            try {
+                await user.signUp();
+                this.isLogged$.next(true);
+            } catch (error) {
+                alert("Error: " + error.code + " " + error.message);
+            }
         }
     }
 
@@ -100,8 +106,27 @@ export class MoralisService {
         return await transQuery.find();
     }
 
+    public async update(keyObj: MoralisObject, objToSave: any, key: string, equalsValue: string): Promise<void> {
+        const query = new Moralis.Query(keyObj.getClassname());
+        query.equalTo(key, equalsValue);
+        const queryResult = (await query.first()) as any;
+
+        if (queryResult == undefined) {
+            return undefined;
+        }
+
+        Object.keys(keyObj).forEach(key => {
+            if (objToSave[key] != queryResult.get(key)) {
+                queryResult.set(key, objToSave[key]);
+                console.log(key);
+            }
+        })
+
+        await queryResult.save();
+    }
+
     public async add(objToSave: any): Promise<void> {
-        const saveExtendObj = Moralis.Object.extend(objToSave.constructor.name);
+        const saveExtendObj = Moralis.Object.extend(objToSave.getClassname());
 
         const event = new saveExtendObj();
 
@@ -166,6 +191,18 @@ export class MoralisService {
         })
 
         return newValue;
+    }
+
+    public async saveImageIFPS(name: string, img: string): Promise<string> {
+        try {
+            const file = new Moralis.File(name, { base64: img });
+            await file.saveIPFS();
+            return file.ipfs();
+        } catch (error) {
+            console.error(error);
+        }
+
+        return "";
     }
 
     public getUser(): User {

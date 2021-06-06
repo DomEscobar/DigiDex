@@ -10,9 +10,14 @@
                 Successful logged
             </h4>
           <hr>
-          <button (click)="close()">Ok</button>  
+          <button class="btn btn-primary w-100" (click)="close()">Ok</button>  
         </ng-container>
         <ng-template #logged>
+
+            <button class="btn btn-primary btn-sign mt-4 w-100" (click)="signInBrowser()">
+                BrowserID
+            </button>
+
             <button class="btn btn-primary btn-sign mt-4 w-100" (click)="signInMetamask()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="212" height="189" viewBox="0 0 212 189">
                     <g fill="none" fill-rule="evenodd">

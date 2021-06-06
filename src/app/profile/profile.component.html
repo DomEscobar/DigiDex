@@ -1,17 +1,35 @@
+<div class="bg">
+
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+</div>
+
+
 <ng-container *ngIf="collector$ | async as collector">
     <div class="background">
         <div class="profile-container">
-            <img-lazy rounded="true" src="assets/quest.png"></img-lazy>
+            <img class="rounded" [src]="collector.img || 'assets/quest.png'" />
 
-            <h4>
+            <ng-container *ngIf="canEdit">
+                <input #uploadFile style="opacity: 0;" type='file' (change)="onUpdateProfilePicture($event, collector)">
+                <span class="material-icons change-icon" (click)="uploadFile.click()">
+                    arrow_circle_up
+                </span>
+            </ng-container>
+
+            <h3 class="ci">
                 {{collector.name}}
-            </h4>
+            </h3>
         </div>
     </div>
     <!--TODO a-component-->
     <div class="row mt-5">
         <div class="col-6 col-md-3 mb-4" *ngFor="let digible of collector.cards">
-            <digi-card [routerLink]="['/digibles', digible.tid]" name="{{digible.name}}" image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" price="{{digible.price}}"></digi-card>
+            <digi-card [routerLink]="['/digibles', digible.tid]" name="{{digible.name}}"
+                image="https://ipfs.arkerlabs.com/ipfs/{{digible.img}}" price="{{digible.price}}"></digi-card>
         </div>
     </div>
 </ng-container>

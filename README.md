@@ -8,3 +8,6 @@
 <br><br>
 
 <a href="https://digible-master.vercel.app/"> DEMO </a>
+
+<br><br><br>
+<i> The project is not written in exquisite code quality </i>

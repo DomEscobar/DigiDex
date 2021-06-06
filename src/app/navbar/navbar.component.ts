@@ -5,7 +5,7 @@ import { MoralisService } from '../+services/moralis.service';
 import { Observable } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-
+import { getBrowserAddress } from '../+services/utils';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -20,7 +20,7 @@ export class NavbarComponent {
     private readonly _moralis: MoralisService) {
     this.isLogged$ = this._moralis.isLogged$.asObservable().pipe(delay(1000), tap((isLogged) => {
       if (isLogged) {
-        this.myEthAddress = this._moralis.getCurrentEthAddress();
+        this.myEthAddress = this._moralis.getCurrentEthAddress() || getBrowserAddress();
       }
     }));
   }
