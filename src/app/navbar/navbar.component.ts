@@ -28,7 +28,7 @@ export class NavbarComponent {
   public signIn() {
 
     if (this.myEthAddress != undefined) {
-      this._router.navigate(['profile', this.myEthAddress]);
+      this._router.navigate(['profile', this._moralis.getCurrentEthAddress() || getBrowserAddress()]);
       return;
     }
 
